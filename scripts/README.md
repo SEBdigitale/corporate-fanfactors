@@ -7,6 +7,7 @@ This folder contains dependency-free Node.js scripts used to keep the static cor
 - `npm run seo:apply`: rewrites generated SEO metadata and regenerates `sitemap.xml`.
 - `npm run site:validate`: validates pages, blog posts, metadata, navigation, local links, assets, crawl files, and required documentation.
 - `npm run supabase:validate`: validates the corporate blog Supabase migration contract.
+- `npm run security:validate`: validates the environment template and scans tracked source files for obvious committed secrets.
 - `npm run validate`: runs the complete validation suite used by GitHub Actions.
 
 ## Structure

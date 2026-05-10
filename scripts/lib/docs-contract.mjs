@@ -7,6 +7,7 @@ export const REQUIRED_DOCUMENTATION_FILES = [
   'data/README.md',
   'scripts/README.md',
   'docs/blog-platform.md',
+  'docs/environment-security.md',
   'docs/quality-gates.md',
   'docs/seo-ai-optimization.md',
   'docs/static-site-tooling.md',

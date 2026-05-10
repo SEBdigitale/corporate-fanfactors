@@ -9,6 +9,7 @@
     "site:validate": "node scripts/validate-site.mjs",
     "supabase:validate": "node scripts/validate-supabase.mjs",
     "docs:validate": "node scripts/validate-site.mjs",
-    "validate": "node scripts/validate-site.mjs && node scripts/validate-supabase.mjs"
+    "security:validate": "node scripts/validate-security.mjs",
+    "validate": "node scripts/validate-site.mjs && node scripts/validate-supabase.mjs && node scripts/validate-security.mjs"
   }
 }

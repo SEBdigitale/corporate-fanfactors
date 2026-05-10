@@ -22,6 +22,7 @@ The validation job checks the static site contracts before Vercel receives new p
 - blog post metadata matches static blog pages
 - Supabase blog migration keeps required tables, columns, RLS policies, and publishing constraints
 - required repository and module documentation files exist
+- environment template and committed secret guardrails pass
 - required crawl and standards files exist
 
 ## Why This Exists

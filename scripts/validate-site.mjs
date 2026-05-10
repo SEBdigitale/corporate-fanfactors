@@ -187,7 +187,7 @@ for (const page of pages.filter((item) => item.index === false)) {
   }
 }
 
-for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', 'data/site-navigation.json', 'data/blog-posts.json', 'supabase/migrations/20260510154500_create_corporate_blog.sql']) {
+for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', '.env.example', 'data/site-navigation.json', 'data/blog-posts.json', 'supabase/migrations/20260510154500_create_corporate_blog.sql']) {
   if (!fs.existsSync(path.join(rootDir, requiredFile))) {
     failures.push(`${requiredFile}: required repository file is missing`);
   }

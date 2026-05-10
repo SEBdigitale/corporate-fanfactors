@@ -63,10 +63,13 @@ npm run seo:apply
 npm run seo:validate
 npm run supabase:validate
 npm run docs:validate
+npm run security:validate
 npm run validate
 ```
 
 Tooling details are documented in `docs/static-site-tooling.md`.
+
+Environment and secret-handling rules are documented in `docs/environment-security.md`.
 
 ## Quality gates
 
