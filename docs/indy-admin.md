@@ -21,6 +21,7 @@ This is not the production CMS.
 - It does not publish changes to the public blog.
 - It is marked `noindex` and routed through `vercel.json`.
 - `/indy` is validated through `data/site-routes.json` so the clean admin URL keeps resolving to `indy.html`.
+- `data/indy-admin.json` validates the required local editor fields, controls, script, storage key, and seed source.
 
 ## Production Path
 

@@ -41,6 +41,10 @@ The validator checks that registered blog posts:
 - appear on `blog.html`
 - include their registry title, excerpt, category, SEO title, SEO description, and featured image
 
+## Indy Admin Registry
+
+`data/indy-admin.json` protects the local admin prototype contract until it is replaced by a Supabase-backed editor.
+
 ## Scripts
 
 Use:

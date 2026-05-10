@@ -22,6 +22,7 @@ The validation job checks the static site contracts before Vercel receives new p
 - local links and assets resolve
 - `/indy` remains registered as a noindex admin prototype
 - Vercel rewrites match `data/site-routes.json`
+- Indy editor controls and local storage contract match `data/indy-admin.json`
 - blog post metadata matches static blog pages
 - Supabase blog migration keeps required tables, columns, RLS policies, and publishing constraints
 - required repository and module documentation files exist

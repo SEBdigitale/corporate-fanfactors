@@ -8,6 +8,7 @@ This folder contains static registry files that act as the source of truth while
 - `site-navigation.json`: expected header, footer, and protected admin links.
 - `site-routes.json`: clean-route rewrites expected by Vercel.
 - `blog-posts.json`: published blog metadata shaped to match the future Supabase `corporate_blog_posts` table.
+- `indy-admin.json`: required local editor controls, fields, storage key, script, and seed source.
 
 ## Rules
 

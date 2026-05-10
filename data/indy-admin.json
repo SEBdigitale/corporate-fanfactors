@@ -1,0 +1,28 @@
+{
+  "page": "indy.html",
+  "script": "assets/js/indy-admin.js",
+  "storageKey": "fanfactors-indy-posts",
+  "seedSource": "data/blog-posts.json",
+  "requiredControls": [
+    "data-indy-form",
+    "data-indy-post-list",
+    "data-indy-preview",
+    "data-indy-note",
+    "data-indy-new",
+    "data-indy-delete",
+    "data-indy-reset"
+  ],
+  "requiredFields": [
+    "id",
+    "title",
+    "slug",
+    "category",
+    "status",
+    "excerpt",
+    "body",
+    "featuredImage",
+    "socialImage",
+    "tags",
+    "links"
+  ]
+}

@@ -3,15 +3,17 @@ import path from 'node:path';
 import { validateAccessibilityContract } from './lib/accessibility-contract.mjs';
 import { validateBlogPostContract } from './lib/blog-content.mjs';
 import { validateDocumentationContract } from './lib/docs-contract.mjs';
+import { validateIndyAdminContract } from './lib/indy-contract.mjs';
 import { validateRouteContract } from './lib/route-contract.mjs';
 import { canonicalUrl, loadPageRegistry } from './lib/seo.mjs';
-import { loadBlogPostRegistry, loadJsonFile, loadNavigationRegistry, loadRouteRegistry } from './lib/site-data.mjs';
+import { loadBlogPostRegistry, loadIndyAdminRegistry, loadJsonFile, loadNavigationRegistry, loadRouteRegistry } from './lib/site-data.mjs';
 
 const rootDir = process.cwd();
 const pages = loadPageRegistry(rootDir);
 const navigation = loadNavigationRegistry(rootDir);
 const blogPosts = loadBlogPostRegistry(rootDir);
 const routes = loadRouteRegistry(rootDir);
+const indyAdmin = loadIndyAdminRegistry(rootDir);
 const vercelConfig = loadJsonFile(rootDir, 'vercel.json');
 const registeredFiles = new Set(pages.map((page) => page.file));
 const pagesByFile = new Map(pages.map((page) => [page.file, page]));
@@ -160,6 +162,27 @@ function validateRoutes() {
   failures.push(...validateRouteContract(routes, vercelConfig, navigation.protectedLinks));
 }
 
+function validateIndyAdmin() {
+  const htmlPath = path.join(rootDir, indyAdmin.page);
+  const scriptPath = path.join(rootDir, indyAdmin.script);
+
+  if (!fs.existsSync(htmlPath)) {
+    failures.push(`${indyAdmin.page}: Indy admin page is missing`);
+    return;
+  }
+
+  if (!fs.existsSync(scriptPath)) {
+    failures.push(`${indyAdmin.script}: Indy admin script is missing`);
+    return;
+  }
+
+  failures.push(...validateIndyAdminContract(
+    indyAdmin,
+    fs.readFileSync(htmlPath, 'utf8'),
+    fs.readFileSync(scriptPath, 'utf8'),
+  ));
+}
+
 for (const page of pages) {
   const pagePath = path.join(rootDir, page.file);
   if (!fs.existsSync(pagePath)) {
@@ -177,6 +200,7 @@ for (const page of pages) {
 validateBlogPostRegistry();
 validateDocumentation();
 validateRoutes();
+validateIndyAdmin();
 
 for (const file of fs.readdirSync(rootDir).filter((item) => item.endsWith('.html'))) {
   if (!registeredFiles.has(file)) {
@@ -197,7 +221,7 @@ for (const page of pages.filter((item) => item.index === false)) {
   }
 }
 
-for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', '.env.example', 'vercel.json', 'data/site-navigation.json', 'data/site-routes.json', 'data/blog-posts.json', 'supabase/migrations/20260510154500_create_corporate_blog.sql']) {
+for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', '.env.example', 'vercel.json', 'data/site-navigation.json', 'data/site-routes.json', 'data/blog-posts.json', 'data/indy-admin.json', 'supabase/migrations/20260510154500_create_corporate_blog.sql']) {
   if (!fs.existsSync(path.join(rootDir, requiredFile))) {
     failures.push(`${requiredFile}: required repository file is missing`);
   }
@@ -208,4 +232,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${pages.length} pages, ${blogPosts.length} blog posts, SEO metadata, accessibility, routes, navigation, documentation, local links, assets, and crawl files.`);
+console.log(`Validated ${pages.length} pages, ${blogPosts.length} blog posts, SEO metadata, accessibility, Indy admin, routes, navigation, documentation, local links, assets, and crawl files.`);
