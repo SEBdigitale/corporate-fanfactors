@@ -62,6 +62,7 @@ The page/navigation registries and validation tooling keep repeated static marku
 npm run seo:apply
 npm run seo:validate
 npm run supabase:validate
+npm run docs:validate
 npm run validate
 ```
 

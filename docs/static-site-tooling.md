@@ -45,6 +45,7 @@ Use:
 npm run seo:apply
 npm run seo:validate
 npm run site:validate
+npm run docs:validate
 npm run validate
 ```
 
@@ -60,6 +61,7 @@ npm run validate
 - admin pages have `noindex`
 - expected header and footer links are present on each page
 - registered blog posts match their static pages
+- required module documentation files exist
 - sitemap includes only indexable pages
 - every top-level HTML page is registered
 - local `href` and `src` targets exist
