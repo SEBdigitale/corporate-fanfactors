@@ -65,6 +65,10 @@ npm run validate
 
 Tooling details are documented in `docs/static-site-tooling.md`.
 
+## Quality gates
+
+GitHub Actions runs `npm run validate` on pushes to `main` and pull requests. The workflow is documented in `docs/quality-gates.md`.
+
 ## Preview locally
 
 ```bash
