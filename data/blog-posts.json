@@ -7,7 +7,9 @@
     "category": "Fan Ownership",
     "tags": ["fan owners", "music business", "FanScore"],
     "featuredImage": "assets/images/artist-pop-collective.webp",
+    "socialImage": "assets/images/artist-pop-collective.webp",
     "status": "published",
+    "publishedAt": "2026-05-10T00:00:00.000Z",
     "seoTitle": "Fan Owners: The Next Music Business Model — FanFactors Blog",
     "seoDescription": "The biggest fans already create value. FanFactors gives them a platform role where taste, trust, selling and support can become a measurable music business."
   },
@@ -19,7 +21,9 @@
     "category": "Direct Pay",
     "tags": ["direct pay", "legal listening", "copyright owners"],
     "featuredImage": "assets/images/artist-dj-turntables.webp",
+    "socialImage": "assets/images/artist-dj-turntables.webp",
     "status": "published",
+    "publishedAt": "2026-05-10T00:00:00.000Z",
     "seoTitle": "Why Direct-Pay Music Matters — FanFactors Blog",
     "seoDescription": "Music platforms should not hide value from the people who own the songs. FanFactors makes legal listening and owner-directed payments part of the product story from day one."
   },
@@ -31,7 +35,9 @@
     "category": "Mission",
     "tags": ["mission", "ownership", "music economy"],
     "featuredImage": "assets/images/artist-hiphop-crew.webp",
+    "socialImage": "assets/images/artist-hiphop-crew.webp",
     "status": "published",
+    "publishedAt": "2026-05-10T00:00:00.000Z",
     "seoTitle": "The Billion Millionaires Mission — FanFactors Blog",
     "seoDescription": "FanFactors is built around the belief that music culture can create more owners, more sellers, more artist upside and more economic participation at global scale."
   }

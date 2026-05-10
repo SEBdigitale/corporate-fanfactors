@@ -39,6 +39,7 @@ supabase/migrations/20260510154500_create_corporate_blog.sql
 The recommended implementation path is documented in `docs/blog-platform.md`.
 
 Current static blog metadata lives in `data/blog-posts.json`, shaped to match the future Supabase publishing model.
+The reusable validation rules live in `scripts/lib/blog-content.mjs`.
 
 ## SEO and AI discoverability
 

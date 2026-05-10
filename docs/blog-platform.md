@@ -38,6 +38,15 @@ Posts should include:
 
 The registry is intentionally small and only includes published posts. It gives the static site a single content contract for validation before the full admin CMS is built.
 
+The validation rules in `scripts/lib/blog-content.mjs` mirror the current Supabase constraints for:
+
+- title length
+- URL-safe slugs
+- excerpt length
+- allowed statuses
+- required `publishedAt` values for published posts
+- SEO title and description lengths
+
 ## Admin Flow
 
 The production admin should support:

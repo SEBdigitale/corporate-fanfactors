@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { validateBlogPostContract } from './lib/blog-content.mjs';
 import { canonicalUrl, loadPageRegistry } from './lib/seo.mjs';
 import { loadBlogPostRegistry, loadNavigationRegistry } from './lib/site-data.mjs';
 
@@ -96,6 +97,8 @@ function validateBlogPostRegistry() {
   const blogIndexHtml = fs.readFileSync(blogIndexPath, 'utf8');
 
   for (const post of blogPosts) {
+    failures.push(...validateBlogPostContract(post));
+
     const page = pagesByFile.get(post.file);
     const postPath = path.join(rootDir, post.file);
 
@@ -106,10 +109,6 @@ function validateBlogPostRegistry() {
 
     if (page.schemaType !== 'Article') {
       failures.push(`${post.file}: blog post page must use Article schemaType`);
-    }
-
-    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(post.slug)) {
-      failures.push(`${post.file}: blog post slug is not URL-safe`);
     }
 
     if (slugs.has(post.slug)) {
@@ -140,6 +139,10 @@ function validateBlogPostRegistry() {
 
     if (!fs.existsSync(path.join(rootDir, post.featuredImage))) {
       failures.push(`${post.file}: featured image does not exist: ${post.featuredImage}`);
+    }
+
+    if (post.socialImage && !fs.existsSync(path.join(rootDir, post.socialImage))) {
+      failures.push(`${post.file}: social image does not exist: ${post.socialImage}`);
     }
   }
 }

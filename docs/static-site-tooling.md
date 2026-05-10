@@ -31,6 +31,7 @@ The current site still duplicates the header and footer in each HTML file. The v
 
 The validator checks that registered blog posts:
 
+- satisfy Supabase-aligned content constraints
 - use unique URL-safe slugs
 - map to an `Article` page in `data/site-pages.json`
 - appear on `blog.html`
