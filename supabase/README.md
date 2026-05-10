@@ -17,3 +17,13 @@ Apply migrations to the Supabase project that will back `corporate.fanfactors.co
 - Public reads are limited to published posts.
 - Authenticated writes are limited to users with an editor/admin profile row.
 - Service-role credentials must only be used server-side.
+
+## Validation
+
+Run:
+
+```bash
+npm run supabase:validate
+```
+
+This checks that the corporate blog migration still contains the expected tables, fields, RLS policies, and publishing constraints.

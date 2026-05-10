@@ -47,6 +47,8 @@ The validation rules in `scripts/lib/blog-content.mjs` mirror the current Supaba
 - required `publishedAt` values for published posts
 - SEO title and description lengths
 
+`scripts/lib/supabase-schema.mjs` validates that the migration keeps the expected blog tables, fields, RLS policies, and publishing constraints in place.
+
 ## Admin Flow
 
 The production admin should support:

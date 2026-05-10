@@ -7,6 +7,7 @@
     "seo:apply": "node scripts/apply-seo.mjs",
     "seo:validate": "node scripts/validate-seo.mjs",
     "site:validate": "node scripts/validate-site.mjs",
-    "validate": "node scripts/validate-site.mjs"
+    "supabase:validate": "node scripts/validate-supabase.mjs",
+    "validate": "node scripts/validate-site.mjs && node scripts/validate-supabase.mjs"
   }
 }
