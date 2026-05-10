@@ -53,7 +53,7 @@ Ongoing SEO and AI requirements are documented in `docs/seo-ai-optimization.md`.
 
 ## Static tooling
 
-The page registry and SEO tooling keep metadata reusable while this remains a static site:
+The page/navigation registries and validation tooling keep repeated static markup safer while this remains a static site:
 
 ```bash
 npm run seo:apply

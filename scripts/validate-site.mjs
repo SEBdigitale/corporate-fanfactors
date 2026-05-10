@@ -1,9 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { canonicalUrl, loadPageRegistry } from './lib/seo.mjs';
+import { loadNavigationRegistry } from './lib/site-data.mjs';
 
 const rootDir = process.cwd();
 const pages = loadPageRegistry(rootDir);
+const navigation = loadNavigationRegistry(rootDir);
 const registeredFiles = new Set(pages.map((page) => page.file));
 const failures = [];
 
@@ -65,6 +67,27 @@ function validateLinksForPage(page, html) {
   }
 }
 
+function validateNavigationForPage(page, html) {
+  for (const href of navigation.headerLinks) {
+    if (!html.includes(`href="${href}"`)) {
+      failures.push(`${page.file}: missing expected header link ${href}`);
+    }
+  }
+
+  for (const href of navigation.footerLinks) {
+    if (!html.includes(`href="${href}"`)) {
+      failures.push(`${page.file}: missing expected footer link ${href}`);
+    }
+  }
+
+  for (const href of navigation.protectedLinks) {
+    const linkedFromPublicPage = page.index !== false && html.includes(`href="${href}"`);
+    if (linkedFromPublicPage && href === 'admin-dashboard.html') {
+      failures.push(`${page.file}: public page should not link directly to protected dashboard ${href}`);
+    }
+  }
+}
+
 for (const page of pages) {
   const pagePath = path.join(rootDir, page.file);
   if (!fs.existsSync(pagePath)) {
@@ -75,6 +98,7 @@ for (const page of pages) {
   const html = fs.readFileSync(pagePath, 'utf8');
   validateSeoForPage(page, html);
   validateLinksForPage(page, html);
+  validateNavigationForPage(page, html);
 }
 
 for (const file of fs.readdirSync(rootDir).filter((item) => item.endsWith('.html'))) {
@@ -96,7 +120,7 @@ for (const page of pages.filter((item) => item.index === false)) {
   }
 }
 
-for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', 'AGENTS.md']) {
+for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', 'AGENTS.md', 'data/site-navigation.json']) {
   if (!fs.existsSync(path.join(rootDir, requiredFile))) {
     failures.push(`${requiredFile}: required repository file is missing`);
   }
@@ -107,4 +131,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${pages.length} pages, SEO metadata, local links, assets, and crawl files.`);
+console.log(`Validated ${pages.length} pages, SEO metadata, navigation, local links, assets, and crawl files.`);

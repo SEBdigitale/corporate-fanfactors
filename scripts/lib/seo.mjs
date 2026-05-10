@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { loadJsonFile } from './site-data.mjs';
 
 export const SITE_ORIGIN = 'https://corporate.fanfactors.com';
 export const DEFAULT_IMAGE = 'assets/images/artist-bassist-vocalist.webp';
@@ -10,8 +11,7 @@ export const LAST_MODIFIED = '2026-05-10';
  * Keeping this source centralized prevents page metadata from drifting across files.
  */
 export function loadPageRegistry(rootDir = process.cwd()) {
-  const registryPath = path.join(rootDir, 'data/site-pages.json');
-  return JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+  return loadJsonFile(rootDir, 'data/site-pages.json');
 }
 
 /**

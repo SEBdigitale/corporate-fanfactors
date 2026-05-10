@@ -1,0 +1,45 @@
+{
+  "headerLinks": [
+    "index.html",
+    "the-problem.html",
+    "revolution.html",
+    "how-it-works.html",
+    "the-game.html",
+    "movement.html",
+    "social-proof.html",
+    "invite-system.html",
+    "call-to-rebels.html",
+    "artists.html",
+    "fans.html",
+    "how-it-works-artists.html",
+    "founding-fathers.html",
+    "media-press.html",
+    "faq.html",
+    "about.html",
+    "gears.html",
+    "videos.html",
+    "blog.html",
+    "contact.html",
+    "https://staging.fanfactors.com"
+  ],
+  "footerLinks": [
+    "the-problem.html",
+    "revolution.html",
+    "how-it-works.html",
+    "the-game.html",
+    "artists.html",
+    "fans.html",
+    "how-it-works-artists.html",
+    "founding-fathers.html",
+    "media-press.html",
+    "https://staging.fanfactors.com",
+    "blog.html",
+    "admin.html",
+    "contact.html",
+    "faq.html"
+  ],
+  "protectedLinks": [
+    "admin.html",
+    "admin-dashboard.html"
+  ]
+}

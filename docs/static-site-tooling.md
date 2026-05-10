@@ -15,6 +15,16 @@ The corporate site is still a static deployment, but metadata and crawl files sh
 - schema type
 - noindex admin pages
 
+## Navigation Registry
+
+`data/site-navigation.json` is the source of truth for:
+
+- expected header links
+- expected footer links
+- protected admin links
+
+The current site still duplicates the header and footer in each HTML file. The validator protects that duplicated shell until the site moves to component templates or Next.js components.
+
 ## Scripts
 
 Use:
@@ -36,6 +46,7 @@ npm run validate
 - each page has exactly one canonical URL
 - JSON-LD is valid JSON
 - admin pages have `noindex`
+- expected header and footer links are present on each page
 - sitemap includes only indexable pages
 - every top-level HTML page is registered
 - local `href` and `src` targets exist
