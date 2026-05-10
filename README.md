@@ -51,6 +51,17 @@ The site includes:
 
 Ongoing SEO and AI requirements are documented in `docs/seo-ai-optimization.md`.
 
+## Static tooling
+
+The page registry and SEO tooling keep metadata reusable while this remains a static site:
+
+```bash
+npm run seo:apply
+npm run seo:validate
+```
+
+Tooling details are documented in `docs/static-site-tooling.md`.
+
 ## Preview locally
 
 ```bash

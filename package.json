@@ -1,0 +1,11 @@
+{
+  "name": "corporate-fanfactors",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "seo:apply": "node scripts/apply-seo.mjs",
+    "seo:validate": "node scripts/validate-seo.mjs",
+    "validate": "node scripts/validate-seo.mjs"
+  }
+}
