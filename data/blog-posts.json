@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Fan Owners: The Next Music Business Model",
+    "slug": "fan-owners-next-music-business-model",
+    "file": "blog-fan-owners.html",
+    "excerpt": "The biggest fans already create value. FanFactors gives them a platform role where taste, trust, selling and support can become a measurable music business.",
+    "category": "Fan Ownership",
+    "tags": ["fan owners", "music business", "FanScore"],
+    "featuredImage": "assets/images/artist-pop-collective.webp",
+    "status": "published",
+    "seoTitle": "Fan Owners: The Next Music Business Model — FanFactors Blog",
+    "seoDescription": "The biggest fans already create value. FanFactors gives them a platform role where taste, trust, selling and support can become a measurable music business."
+  },
+  {
+    "title": "Why Direct-Pay Music Matters",
+    "slug": "why-direct-pay-music-matters",
+    "file": "blog-direct-pay.html",
+    "excerpt": "Music platforms should not hide value from the people who own the songs. FanFactors makes legal listening and owner-directed payments part of the product story from day one.",
+    "category": "Direct Pay",
+    "tags": ["direct pay", "legal listening", "copyright owners"],
+    "featuredImage": "assets/images/artist-dj-turntables.webp",
+    "status": "published",
+    "seoTitle": "Why Direct-Pay Music Matters — FanFactors Blog",
+    "seoDescription": "Music platforms should not hide value from the people who own the songs. FanFactors makes legal listening and owner-directed payments part of the product story from day one."
+  },
+  {
+    "title": "The Billion Millionaires Mission",
+    "slug": "the-billion-millionaires-mission",
+    "file": "blog-billion-millionaires.html",
+    "excerpt": "FanFactors is built around the belief that music culture can create more owners, more sellers, more artist upside and more economic participation at global scale.",
+    "category": "Mission",
+    "tags": ["mission", "ownership", "music economy"],
+    "featuredImage": "assets/images/artist-hiphop-crew.webp",
+    "status": "published",
+    "seoTitle": "The Billion Millionaires Mission — FanFactors Blog",
+    "seoDescription": "FanFactors is built around the belief that music culture can create more owners, more sellers, more artist upside and more economic participation at global scale."
+  }
+]

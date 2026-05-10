@@ -32,6 +32,12 @@ Posts should include:
 - published date
 - author profile
 
+## Static Blog Registry
+
+`data/blog-posts.json` mirrors the future Supabase `corporate_blog_posts` shape for the current static launch posts.
+
+The registry is intentionally small and only includes published posts. It gives the static site a single content contract for validation before the full admin CMS is built.
+
 ## Admin Flow
 
 The production admin should support:

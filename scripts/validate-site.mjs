@@ -1,12 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { canonicalUrl, loadPageRegistry } from './lib/seo.mjs';
-import { loadNavigationRegistry } from './lib/site-data.mjs';
+import { loadBlogPostRegistry, loadNavigationRegistry } from './lib/site-data.mjs';
 
 const rootDir = process.cwd();
 const pages = loadPageRegistry(rootDir);
 const navigation = loadNavigationRegistry(rootDir);
+const blogPosts = loadBlogPostRegistry(rootDir);
 const registeredFiles = new Set(pages.map((page) => page.file));
+const pagesByFile = new Map(pages.map((page) => [page.file, page]));
 const failures = [];
 
 function stripHashAndQuery(value) {
@@ -88,6 +90,60 @@ function validateNavigationForPage(page, html) {
   }
 }
 
+function validateBlogPostRegistry() {
+  const slugs = new Set();
+  const blogIndexPath = path.join(rootDir, 'blog.html');
+  const blogIndexHtml = fs.readFileSync(blogIndexPath, 'utf8');
+
+  for (const post of blogPosts) {
+    const page = pagesByFile.get(post.file);
+    const postPath = path.join(rootDir, post.file);
+
+    if (!page) {
+      failures.push(`${post.file}: blog post is missing from data/site-pages.json`);
+      continue;
+    }
+
+    if (page.schemaType !== 'Article') {
+      failures.push(`${post.file}: blog post page must use Article schemaType`);
+    }
+
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(post.slug)) {
+      failures.push(`${post.file}: blog post slug is not URL-safe`);
+    }
+
+    if (slugs.has(post.slug)) {
+      failures.push(`${post.file}: duplicate blog post slug ${post.slug}`);
+    }
+    slugs.add(post.slug);
+
+    if (post.status !== 'published') {
+      failures.push(`${post.file}: static blog registry can only include published posts`);
+    }
+
+    if (!fs.existsSync(postPath)) {
+      failures.push(`${post.file}: blog post HTML file is missing`);
+      continue;
+    }
+
+    const html = fs.readFileSync(postPath, 'utf8');
+    const requiredStrings = [post.title, post.excerpt, post.category, post.seoTitle, post.seoDescription, post.featuredImage];
+    for (const value of requiredStrings) {
+      if (!html.includes(value)) {
+        failures.push(`${post.file}: static post page is missing registry value: ${value}`);
+      }
+    }
+
+    if (!blogIndexHtml.includes(`href="${post.file}"`)) {
+      failures.push(`blog.html: missing link to registered blog post ${post.file}`);
+    }
+
+    if (!fs.existsSync(path.join(rootDir, post.featuredImage))) {
+      failures.push(`${post.file}: featured image does not exist: ${post.featuredImage}`);
+    }
+  }
+}
+
 for (const page of pages) {
   const pagePath = path.join(rootDir, page.file);
   if (!fs.existsSync(pagePath)) {
@@ -100,6 +156,8 @@ for (const page of pages) {
   validateLinksForPage(page, html);
   validateNavigationForPage(page, html);
 }
+
+validateBlogPostRegistry();
 
 for (const file of fs.readdirSync(rootDir).filter((item) => item.endsWith('.html'))) {
   if (!registeredFiles.has(file)) {
@@ -120,7 +178,7 @@ for (const page of pages.filter((item) => item.index === false)) {
   }
 }
 
-for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', 'AGENTS.md', 'data/site-navigation.json']) {
+for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', 'AGENTS.md', 'data/site-navigation.json', 'data/blog-posts.json']) {
   if (!fs.existsSync(path.join(rootDir, requiredFile))) {
     failures.push(`${requiredFile}: required repository file is missing`);
   }
@@ -131,4 +189,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${pages.length} pages, SEO metadata, navigation, local links, assets, and crawl files.`);
+console.log(`Validated ${pages.length} pages, ${blogPosts.length} blog posts, SEO metadata, navigation, local links, assets, and crawl files.`);

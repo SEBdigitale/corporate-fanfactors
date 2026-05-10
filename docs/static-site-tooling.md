@@ -25,6 +25,17 @@ The corporate site is still a static deployment, but metadata and crawl files sh
 
 The current site still duplicates the header and footer in each HTML file. The validator protects that duplicated shell until the site moves to component templates or Next.js components.
 
+## Blog Registry
+
+`data/blog-posts.json` mirrors the future Supabase blog fields for the current static posts.
+
+The validator checks that registered blog posts:
+
+- use unique URL-safe slugs
+- map to an `Article` page in `data/site-pages.json`
+- appear on `blog.html`
+- include their registry title, excerpt, category, SEO title, SEO description, and featured image
+
 ## Scripts
 
 Use:
@@ -47,6 +58,7 @@ npm run validate
 - JSON-LD is valid JSON
 - admin pages have `noindex`
 - expected header and footer links are present on each page
+- registered blog posts match their static pages
 - sitemap includes only indexable pages
 - every top-level HTML page is registered
 - local `href` and `src` targets exist
