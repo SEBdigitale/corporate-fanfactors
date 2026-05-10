@@ -56,6 +56,8 @@ npm run validate
 `site:validate` and `validate` check:
 
 - every registered HTML page exists
+- every page has one `main#main` landmark and one `h1`
+- images and buttons have accessible names
 - each page has exactly one canonical URL
 - JSON-LD is valid JSON
 - admin pages have `noindex`

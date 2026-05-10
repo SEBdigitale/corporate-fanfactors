@@ -15,6 +15,7 @@ npm run validate
 The validation job checks the static site contracts before Vercel receives new production changes:
 
 - registered pages exist
+- baseline accessibility contracts pass
 - SEO metadata is present and valid
 - sitemap entries match indexable pages
 - header and footer links stay consistent

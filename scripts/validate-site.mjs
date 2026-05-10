@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { validateAccessibilityContract } from './lib/accessibility-contract.mjs';
 import { validateBlogPostContract } from './lib/blog-content.mjs';
 import { validateDocumentationContract } from './lib/docs-contract.mjs';
 import { canonicalUrl, loadPageRegistry } from './lib/seo.mjs';
@@ -163,6 +164,7 @@ for (const page of pages) {
   validateSeoForPage(page, html);
   validateLinksForPage(page, html);
   validateNavigationForPage(page, html);
+  failures.push(...validateAccessibilityContract(page.file, html));
 }
 
 validateBlogPostRegistry();
@@ -198,4 +200,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${pages.length} pages, ${blogPosts.length} blog posts, SEO metadata, navigation, documentation, local links, assets, and crawl files.`);
+console.log(`Validated ${pages.length} pages, ${blogPosts.length} blog posts, SEO metadata, accessibility, navigation, documentation, local links, assets, and crawl files.`);
