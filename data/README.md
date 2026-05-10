@@ -6,6 +6,7 @@ This folder contains static registry files that act as the source of truth while
 
 - `site-pages.json`: page metadata for SEO generation, sitemap generation, and noindex rules, including admin prototypes such as `indy.html`.
 - `site-navigation.json`: expected header, footer, and protected admin links.
+- `site-routes.json`: clean-route rewrites expected by Vercel.
 - `blog-posts.json`: published blog metadata shaped to match the future Supabase `corporate_blog_posts` table.
 
 ## Rules

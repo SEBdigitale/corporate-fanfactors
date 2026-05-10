@@ -25,6 +25,10 @@ The corporate site is still a static deployment, but metadata and crawl files sh
 
 The current site still duplicates the header and footer in each HTML file. The validator protects that duplicated shell until the site moves to component templates or Next.js components.
 
+## Route Registry
+
+`data/site-routes.json` is the source of truth for clean Vercel rewrites such as `/indy`.
+
 ## Blog Registry
 
 `data/blog-posts.json` mirrors the future Supabase blog fields for the current static posts.

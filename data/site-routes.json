@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/indy",
+      "destination": "/indy.html",
+      "protected": true
+    }
+  ]
+}

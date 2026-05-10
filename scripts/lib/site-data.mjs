@@ -22,3 +22,10 @@ export function loadNavigationRegistry(rootDir = process.cwd()) {
 export function loadBlogPostRegistry(rootDir = process.cwd()) {
   return loadJsonFile(rootDir, 'data/blog-posts.json');
 }
+
+/**
+ * Loads clean-route rewrites expected by Vercel.
+ */
+export function loadRouteRegistry(rootDir = process.cwd()) {
+  return loadJsonFile(rootDir, 'data/site-routes.json');
+}
