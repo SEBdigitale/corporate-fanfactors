@@ -58,6 +58,7 @@ The page registry and SEO tooling keep metadata reusable while this remains a st
 ```bash
 npm run seo:apply
 npm run seo:validate
+npm run validate
 ```
 
 Tooling details are documented in `docs/static-site-tooling.md`.

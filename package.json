@@ -6,6 +6,7 @@
   "scripts": {
     "seo:apply": "node scripts/apply-seo.mjs",
     "seo:validate": "node scripts/validate-seo.mjs",
-    "validate": "node scripts/validate-seo.mjs"
+    "site:validate": "node scripts/validate-site.mjs",
+    "validate": "node scripts/validate-site.mjs"
   }
 }

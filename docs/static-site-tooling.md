@@ -22,17 +22,24 @@ Use:
 ```bash
 npm run seo:apply
 npm run seo:validate
+npm run site:validate
+npm run validate
 ```
 
 `seo:apply` rewrites generated metadata blocks and regenerates `sitemap.xml`.
 
-`seo:validate` checks:
+`seo:validate` is kept as a compatibility alias for the broader site validator.
+
+`site:validate` and `validate` check:
 
 - every registered HTML page exists
 - each page has exactly one canonical URL
 - JSON-LD is valid JSON
 - admin pages have `noindex`
 - sitemap includes only indexable pages
+- every top-level HTML page is registered
+- local `href` and `src` targets exist
+- required crawl and standards files exist
 
 ## Migration Note
 
