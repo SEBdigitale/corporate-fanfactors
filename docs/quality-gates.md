@@ -20,6 +20,7 @@ The validation job checks the static site contracts before Vercel receives new p
 - sitemap entries match indexable pages
 - header and footer links stay consistent
 - local links and assets resolve
+- `/indy` remains registered as a noindex admin prototype
 - blog post metadata matches static blog pages
 - Supabase blog migration keeps required tables, columns, RLS policies, and publishing constraints
 - required repository and module documentation files exist

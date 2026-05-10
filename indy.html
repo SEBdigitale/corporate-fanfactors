@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Indy Admin — FanFactors</title>
+  <meta name="description" content="FanFactors Indy admin prototype for local blog editing, page navigation, images, links, and future WYSIWYG planning.">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+<meta name="robots" content="noindex, nofollow"><link rel="canonical" href="https://corporate.fanfactors.com/indy.html"><meta property="og:type" content="website"><meta property="og:site_name" content="FanFactors"><meta property="og:title" content="Indy Admin — FanFactors"><meta property="og:description" content="FanFactors Indy admin prototype for local blog editing, page navigation, images, links, and future WYSIWYG planning."><meta property="og:url" content="https://corporate.fanfactors.com/indy.html"><meta property="og:image" content="https://corporate.fanfactors.com/assets/images/artist-bassist-vocalist.webp"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Indy Admin — FanFactors"><meta name="twitter:description" content="FanFactors Indy admin prototype for local blog editing, page navigation, images, links, and future WYSIWYG planning."><meta name="twitter:image" content="https://corporate.fanfactors.com/assets/images/artist-bassist-vocalist.webp"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Indy Admin — FanFactors","description":"FanFactors Indy admin prototype for local blog editing, page navigation, images, links, and future WYSIWYG planning.","url":"https://corporate.fanfactors.com/indy.html","isPartOf":{"@type":"WebSite","name":"FanFactors Corporate","url":"https://corporate.fanfactors.com"},"publisher":{"@type":"Organization","name":"FanFactors","url":"https://corporate.fanfactors.com"}}</script></head>
+<body class="inner-page" data-page="indy.html">
+<header class="site-header" data-header>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="nav-wrap">
+    <a class="brand" href="index.html" aria-label="FanFactors home">
+      <img src="assets/images/fanfactors-wordmark-dark.png" alt="FanFactors">
+    </a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="primary-nav" aria-label="Main navigation" data-nav>
+      <a class="nav-link active" href="index.html">Home</a>
+      <div class="nav-item has-dropdown">
+        <button class="nav-link dropdown-toggle" type="button" aria-expanded="false">The Opportunity <span class="chevron"></span></button>
+        <div class="dropdown-menu"><a href="the-problem.html" class="dropdown-link">The Problem</a><a href="revolution.html" class="dropdown-link">The Revolution</a><a href="how-it-works.html" class="dropdown-link">How It Works</a><a href="the-game.html" class="dropdown-link">The Game</a><a href="movement.html" class="dropdown-link">The Movement</a><a href="social-proof.html" class="dropdown-link">Social Proof</a><a href="invite-system.html" class="dropdown-link">Invite System</a><a href="call-to-rebels.html" class="dropdown-link">A Call To All Rebels</a></div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <button class="nav-link dropdown-toggle" type="button" aria-expanded="false">FanFactors <span class="chevron"></span></button>
+        <div class="dropdown-menu"><a href="artists.html" class="dropdown-link">Artists Page</a><a href="fans.html" class="dropdown-link">Fans Page</a><a href="how-it-works-artists.html" class="dropdown-link">How It Works Artists</a><a href="founding-fathers.html" class="dropdown-link">Founding Fathers</a><a href="media-press.html" class="dropdown-link">Media / Press</a><a href="faq.html" class="dropdown-link">FAQ Page</a><a href="about.html" class="dropdown-link">About</a></div>
+      </div>
+      <a class="nav-link" href="gears.html">Gears</a>
+      <a class="nav-link" href="videos.html">Videos</a>
+      <a class="nav-link" href="blog.html">Blog</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+      <a class="account-button magnetic" href="https://staging.fanfactors.com" target="_blank" rel="noopener" data-production-url="https://www.fanfactors.com">Create Account</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="hero indy-hero" style="--hero-image: url('assets/images/artist-dj-turntables.webp')">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Indy Admin</span>
+        <h1>Content studio prototype.</h1>
+        <p>Manage local blog drafts, images, links and page structure while the production Supabase admin is being prepared.</p>
+        <div class="badge-row"><span class="badge">Local CRUD</span><span class="badge">Blog posts</span><span class="badge">WYSIWYG-ready</span></div>
+      </div>
+      <div class="hero-panel reveal tilt-card">
+        <div class="panel-top"><span>Storage mode</span><strong>Browser local</strong></div>
+        <div class="hero-stats"><div><strong>3</strong><span>seed posts</span></div><div><strong>0</strong><span>backend writes</span></div><div><strong>Next</strong><span>Supabase admin</span></div></div>
+        <div class="panel-footer"><span class="pulse-dot"></span> Prototype only; production writes need auth and Supabase.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section indy-shell reveal" aria-label="Indy admin workspace">
+    <aside class="indy-sidebar">
+      <div class="indy-sidebar-head">
+        <img src="assets/images/fanfactors-wordmark-dark.png" alt="FanFactors">
+        <span>Site tree</span>
+      </div>
+      <nav aria-label="Editable site sections">
+        <strong>Corporate</strong>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <strong>Blog</strong>
+        <button type="button" data-indy-new>New blog post</button>
+        <div data-indy-post-list class="indy-post-list"></div>
+        <strong>Future folders</strong>
+        <span>Pages</span>
+        <span>Media Library</span>
+        <span>Reusable Sections</span>
+      </nav>
+    </aside>
+
+    <div class="indy-workspace">
+      <div class="indy-toolbar">
+        <div>
+          <span class="kicker">Blog editor</span>
+          <h2>Add, edit, delete and preview posts.</h2>
+        </div>
+        <div class="button-row">
+          <button class="btn btn-ghost" type="button" data-indy-reset>Reset Local Drafts</button>
+          <button class="btn btn-primary" type="submit" form="indy-post-form">Save Post</button>
+        </div>
+      </div>
+
+      <div class="indy-editor-grid">
+        <form id="indy-post-form" class="indy-form" data-indy-form>
+          <input type="hidden" name="id">
+          <label>Title <input name="title" type="text" placeholder="Post title" required></label>
+          <label>Slug <input name="slug" type="text" placeholder="url-safe-post-slug" required></label>
+          <div class="indy-field-row">
+            <label>Category <input name="category" type="text" placeholder="Direct Pay" required></label>
+            <label>Status
+              <select name="status" required>
+                <option>draft</option>
+                <option>published</option>
+                <option>archived</option>
+              </select>
+            </label>
+          </div>
+          <label>Excerpt <textarea name="excerpt" rows="3" placeholder="Short summary for blog cards and SEO" required></textarea></label>
+          <label>Body <textarea name="body" rows="10" placeholder="Write the article body here" required></textarea></label>
+          <div class="indy-field-row">
+            <label>Featured image URL <input name="featuredImage" type="text" placeholder="assets/images/artist-dj-turntables.webp"></label>
+            <label>Social image URL <input name="socialImage" type="text" placeholder="assets/images/artist-dj-turntables.webp"></label>
+          </div>
+          <label>Tags <input name="tags" type="text" placeholder="direct pay, legal listening, copyright owners"></label>
+          <label>Links <textarea name="links" rows="3" placeholder="One link per line: Label | https://example.com"></textarea></label>
+          <p class="form-note" data-indy-note>Local edits are saved in this browser only.</p>
+          <div class="button-row">
+            <button class="btn btn-primary" type="submit">Save Post</button>
+            <button class="btn btn-ghost" type="button" data-indy-delete>Delete Selected</button>
+          </div>
+        </form>
+
+        <section class="indy-preview" aria-live="polite">
+          <span class="kicker">Preview</span>
+          <article data-indy-preview>
+            <h3>Select or create a post.</h3>
+            <p>Saved local posts will appear here before the Supabase-backed admin is built.</p>
+          </article>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="assets/images/fanfactors-wordmark-dark.png" alt="FanFactors">
+      <p>FanFactors is a music social media gamified marketplace where legal plays and purchases are designed to pay copyright owners directly.</p>
+      <div class="social-pills"><span>Legal listening</span><span>Direct pay</span><span>Fan Owners</span></div><img class="footer-slogan" src="assets/images/ff-slogan.png" alt="We're taking music back." loading="lazy">
+    </div>
+    <div><h3>The Opportunity</h3><a href="the-problem.html">The Problem</a><a href="revolution.html">The Revolution</a><a href="how-it-works.html">How It Works</a><a href="the-game.html">The Game</a></div>
+    <div><h3>FanFactors</h3><a href="artists.html">Artists Page</a><a href="fans.html">Fans Page</a><a href="how-it-works-artists.html">How It Works Artists</a><a href="founding-fathers.html">Founding Fathers</a><a href="media-press.html">Media / Press</a></div>
+    <div><h3>Launch</h3><a href="https://staging.fanfactors.com" target="_blank" rel="noopener">Create Account</a><a href="blog.html">Blog</a><a href="admin.html">Admin Area</a><a href="contact.html">Contact</a><a href="media-press.html">Media / Press</a><a href="faq.html">FAQ</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 FanFactors. Website front-end package.</span><span>Built for direct pay, fan ownership and the mission to make one billion millionaires.</span></div>
+</footer>
+<button class="back-to-top" aria-label="Back to top" data-back-to-top>↑</button>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/indy-admin.js" defer></script>
+</body>
+</html>

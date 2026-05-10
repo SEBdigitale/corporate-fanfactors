@@ -28,6 +28,8 @@ For launch, switch the href values from staging to the live registration URL.
 
 The Admin Area is a polished static prototype. It demonstrates blog/page/campaign/KPI management but does not include real authentication or backend persistence. The dashboard draft form uses local browser storage only.
 
+`/indy` is the newer content-studio prototype for local blog CRUD, image/link fields, previews and future WYSIWYG planning. It is documented in `docs/indy-admin.md`.
+
 ## Dynamic blog path
 
 Supabase is the preferred backend for the production blog platform. The first migration lives at:

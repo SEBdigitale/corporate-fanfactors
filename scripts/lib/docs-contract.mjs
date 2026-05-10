@@ -8,6 +8,7 @@ export const REQUIRED_DOCUMENTATION_FILES = [
   'scripts/README.md',
   'docs/blog-platform.md',
   'docs/environment-security.md',
+  'docs/indy-admin.md',
   'docs/quality-gates.md',
   'docs/seo-ai-optimization.md',
   'docs/static-site-tooling.md',

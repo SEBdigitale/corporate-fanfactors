@@ -40,6 +40,7 @@
   ],
   "protectedLinks": [
     "admin.html",
-    "admin-dashboard.html"
+    "admin-dashboard.html",
+    "indy.html"
   ]
 }

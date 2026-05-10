@@ -133,5 +133,9 @@
   {
     "file": "admin-dashboard.html",
     "index": false
+  },
+  {
+    "file": "indy.html",
+    "index": false
   }
 ]
