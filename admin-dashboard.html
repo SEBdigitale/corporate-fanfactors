@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin Dashboard — FanFactors</title><meta name="description" content="Static admin dashboard prototype for managing blog drafts, campaign copy and KPI story cards."><link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml"><script>document.documentElement.classList.add('js');</script><link rel="stylesheet" href="assets/css/styles.css"></head><body class="inner-page" data-page="admin-dashboard.html"><header class="site-header" data-header>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="nav-wrap">
+    <a class="brand" href="index.html" aria-label="FanFactors home">
+      <img src="assets/images/fanfactors-wordmark-dark.png" alt="FanFactors">
+    </a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="primary-nav" aria-label="Main navigation" data-nav>
+      <a class="nav-link active" href="index.html">Home</a>
+      <div class="nav-item has-dropdown">
+        <button class="nav-link dropdown-toggle" type="button" aria-expanded="false">The Opportunity <span class="chevron"></span></button>
+        <div class="dropdown-menu"><a href="the-problem.html" class="dropdown-link">The Problem</a><a href="revolution.html" class="dropdown-link">The Revolution</a><a href="how-it-works.html" class="dropdown-link">How It Works</a><a href="the-game.html" class="dropdown-link">The Game</a><a href="movement.html" class="dropdown-link">The Movement</a><a href="social-proof.html" class="dropdown-link">Social Proof</a><a href="invite-system.html" class="dropdown-link">Invite System</a><a href="call-to-rebels.html" class="dropdown-link">A Call To All Rebels</a></div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <button class="nav-link dropdown-toggle" type="button" aria-expanded="false">FanFactors <span class="chevron"></span></button>
+        <div class="dropdown-menu"><a href="artists.html" class="dropdown-link">Artists Page</a><a href="fans.html" class="dropdown-link">Fans Page</a><a href="how-it-works-artists.html" class="dropdown-link">How It Works Artists</a><a href="founding-fathers.html" class="dropdown-link">Founding Fathers</a><a href="media-press.html" class="dropdown-link">Media / Press</a><a href="faq.html" class="dropdown-link">FAQ Page</a><a href="about.html" class="dropdown-link">About</a></div>
+      </div>
+      <a class="nav-link" href="gears.html">Gears</a>
+      <a class="nav-link" href="videos.html">Videos</a>
+      <a class="nav-link" href="blog.html">Blog</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+      <a class="account-button magnetic" href="https://staging.fanfactors.com" target="_blank" rel="noopener" data-production-url="https://www.fanfactors.com">Create Account</a>
+    </nav>
+  </div>
+</header><main id="main"><section class="hero" style="--hero-image: url('assets/images/artist-dj-turntables.webp')"><div class="hero-bg" aria-hidden="true"></div><div class="hero-orb orb-one" aria-hidden="true"></div><div class="hero-orb orb-two" aria-hidden="true"></div><div class="hero-content"><div class="hero-copy reveal"><span class="eyebrow">Admin Dashboard</span><h1>Admin Dashboard</h1><p>Static admin dashboard prototype for managing blog drafts, campaign copy and KPI story cards.</p><div class="badge-row"><span class="badge">Fan Owners</span><span class="badge">Direct Pay</span><span class="badge">We're taking music back</span></div><div class="button-row"><a class="btn btn-primary magnetic" href="https://staging.fanfactors.com" target="_blank" rel="noopener" data-production-url="https://www.fanfactors.com">Create Account<span aria-hidden="true">→</span></a><a class="btn btn-ghost magnetic" href="index.html">Back Home</a></div></div><div class="hero-panel reveal tilt-card"><div class="panel-top"><span>FanFactors Signal</span><strong>We're taking music back.</strong></div><div class="hero-stats"><div><strong>Legal</strong><span>listening</span></div><div><strong>Fan</strong><span>ownership</span></div><div><strong>Direct</strong><span>owner value</span></div></div><div class="panel-footer"><span class="pulse-dot"></span> staging.fanfactors.com → production: fanfactors.com</div></div></div></section>
+<section class="section v3-dashboard reveal"><aside><img src="assets/images/fanfactors-wordmark-dark.png" alt="FanFactors"><a href="#posts">Posts</a><a href="#pages">Pages</a><a href="#campaigns">Campaigns</a><a href="#kpis">KPIs</a></aside><div><span class="kicker">Admin Dashboard</span><h2>Content command center</h2><div class="v3-score-grid"><article><strong>24</strong><span>site pages</span></article><article><strong>3</strong><span>blog posts</span></article><article><strong>1</strong><span>slogan system</span></article><article><strong>1B</strong><span>mission</span></article></div><section id="posts" class="v3-admin-module"><h3>Create demo blog draft</h3><form data-admin-post-form><input name="title" placeholder="Post title" required><select name="category"><option>Fan Owners</option><option>Direct Pay</option><option>Mission</option></select><textarea name="summary" rows="4" placeholder="Summary" required></textarea><button class="btn btn-primary" type="submit">Save Draft</button></form><div data-draft-list class="draft-list"></div></section><section id="kpis" class="v3-admin-module"><h3>Story KPIs</h3><div class="v3-card-stack"><article><strong>Account CTA clicks</strong><span>Visitors clicking Create Account.</span></article><article><strong>Fan Owner starts</strong><span>Fans entering the business-owner path.</span></article><article><strong>Artist leads</strong><span>Artists requesting onboarding.</span></article></div></section></div></section></main><footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="assets/images/fanfactors-wordmark-dark.png" alt="FanFactors">
+      <p>FanFactors is a music social media gamified marketplace where legal plays and purchases are designed to pay copyright owners directly.</p>
+      <div class="social-pills"><span>Legal listening</span><span>Direct pay</span><span>Fan Owners</span></div><img class="footer-slogan" src="assets/images/ff-slogan.png" alt="We're taking music back." loading="lazy">
+    </div>
+    <div><h3>The Opportunity</h3><a href="the-problem.html">The Problem</a><a href="revolution.html">The Revolution</a><a href="how-it-works.html">How It Works</a><a href="the-game.html">The Game</a></div>
+    <div><h3>FanFactors</h3><a href="artists.html">Artists Page</a><a href="fans.html">Fans Page</a><a href="how-it-works-artists.html">How It Works Artists</a><a href="founding-fathers.html">Founding Fathers</a><a href="media-press.html">Media / Press</a></div>
+    <div><h3>Launch</h3><a href="https://staging.fanfactors.com" target="_blank" rel="noopener">Create Account</a><a href="blog.html">Blog</a><a href="admin.html">Admin Area</a><a href="contact.html">Contact</a><a href="media-press.html">Media / Press</a><a href="faq.html">FAQ</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 FanFactors. Website front-end package.</span><span>Built for direct pay, fan ownership and the mission to make one billion millionaires.</span></div>
+</footer><button class="back-to-top" aria-label="Back to top" data-back-to-top>↑</button><script src="assets/js/main.js" defer></script></body></html>
