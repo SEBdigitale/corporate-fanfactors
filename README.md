@@ -8,6 +8,8 @@ This package updates the prior FanFactors site around the actual platform story:
 - Fans becoming music business owners through artist-approved selling
 - FanScore, quests, invites and social proof
 - Blog and static Admin Studio prototype
+- SEO and AI crawl foundation for the corporate domain
+- Supabase-ready blog publishing schema
 - The mission to make one billion millionaires through music-powered ownership
 
 ## Create Account button
@@ -25,6 +27,29 @@ For launch, switch the href values from staging to the live registration URL.
 ## Admin area note
 
 The Admin Area is a polished static prototype. It demonstrates blog/page/campaign/KPI management but does not include real authentication or backend persistence. The dashboard draft form uses local browser storage only.
+
+## Dynamic blog path
+
+Supabase is the preferred backend for the production blog platform. The first migration lives at:
+
+```text
+supabase/migrations/20260510154500_create_corporate_blog.sql
+```
+
+The recommended implementation path is documented in `docs/blog-platform.md`.
+
+## SEO and AI discoverability
+
+The site includes:
+
+- `robots.txt`
+- `sitemap.xml`
+- `llms.txt`
+- canonical URLs
+- Open Graph and Twitter card metadata
+- JSON-LD structured data
+
+Ongoing SEO and AI requirements are documented in `docs/seo-ai-optimization.md`.
 
 ## Preview locally
 

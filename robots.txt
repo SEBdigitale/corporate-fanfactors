@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin-dashboard.html
+
+Sitemap: https://corporate.fanfactors.com/sitemap.xml
