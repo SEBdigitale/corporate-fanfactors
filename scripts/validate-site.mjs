@@ -78,6 +78,10 @@ function validateLinksForPage(page, html) {
 }
 
 function validateNavigationForPage(page, html) {
+  if (page.index === false) {
+    return;
+  }
+
   for (const href of navigation.headerLinks) {
     if (!html.includes(`href="${href}"`)) {
       failures.push(`${page.file}: missing expected header link ${href}`);

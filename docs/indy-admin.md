@@ -2,7 +2,7 @@
 
 ## Purpose
 
-`/indy` is a static admin prototype for the future FanFactors content studio.
+`/indy` is a static admin prototype for the future FanFactors content studio. The page now uses a clean Squarespace-style shell with a left page tree, expandable folders, a preview canvas, and a modal blog editor.
 
 It supports local browser CRUD for blog posts:
 
@@ -11,6 +11,8 @@ It supports local browser CRUD for blog posts:
 - delete posts
 - modify title, slug, category, status, excerpt, body, images, tags, and links
 - preview the selected post
+- browse the site structure through expandable page folders
+- open blog post controls in a focused editor modal
 
 ## Current Limits
 
@@ -20,6 +22,7 @@ This is not the production CMS.
 - It does not write to Supabase.
 - It does not publish changes to the public blog.
 - It is marked `noindex` and routed through `vercel.json`.
+- It intentionally uses an admin shell instead of the public site header and footer.
 - `/indy` is validated through `data/site-routes.json` so the clean admin URL keeps resolving to `indy.html`.
 - `data/indy-admin.json` validates the required local editor fields, controls, script, storage key, and seed source.
 

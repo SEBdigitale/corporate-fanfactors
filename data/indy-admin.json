@@ -9,6 +9,10 @@
     "data-indy-preview",
     "data-indy-note",
     "data-indy-new",
+    "data-indy-open-current",
+    "data-indy-modal",
+    "data-indy-close-modal",
+    "data-indy-folder-toggle",
     "data-indy-delete",
     "data-indy-reset"
   ],
