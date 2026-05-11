@@ -58,7 +58,7 @@ Ongoing SEO and AI requirements are documented in `docs/seo-ai-optimization.md`.
 
 ## Static tooling
 
-Use Node.js 20 or newer for the validation scripts. GitHub Actions is pinned to Node.js 20.
+Use Node.js 20 or newer for the validation scripts. `.nvmrc` and GitHub Actions are pinned to Node.js 20.
 
 The page/navigation registries and validation tooling keep repeated static markup safer while this remains a static site:
 

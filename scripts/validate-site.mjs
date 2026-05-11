@@ -221,10 +221,14 @@ for (const page of pages.filter((item) => item.index === false)) {
   }
 }
 
-for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', '.env.example', 'vercel.json', 'data/site-navigation.json', 'data/site-routes.json', 'data/blog-posts.json', 'data/indy-admin.json', 'supabase/migrations/20260510154500_create_corporate_blog.sql']) {
+for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', '.env.example', '.nvmrc', 'vercel.json', 'data/site-navigation.json', 'data/site-routes.json', 'data/blog-posts.json', 'data/indy-admin.json', 'supabase/migrations/20260510154500_create_corporate_blog.sql']) {
   if (!fs.existsSync(path.join(rootDir, requiredFile))) {
     failures.push(`${requiredFile}: required repository file is missing`);
   }
+}
+
+if (fs.readFileSync(path.join(rootDir, '.nvmrc'), 'utf8').trim() !== '20') {
+  failures.push('.nvmrc: expected Node.js major version 20');
 }
 
 if (failures.length > 0) {

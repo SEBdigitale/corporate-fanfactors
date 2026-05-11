@@ -4,7 +4,9 @@
 
 `.github/workflows/validate.yml` runs on pushes to `main` and on pull requests.
 
-The workflow uses Node.js 20 and runs:
+The workflow uses Node.js 20. Local shells should use the same major version through `.nvmrc`.
+
+It runs:
 
 ```bash
 npm run validate
@@ -26,6 +28,7 @@ The validation job checks the static site contracts before Vercel receives new p
 - blog post metadata matches static blog pages
 - Supabase blog migration keeps required tables, columns, RLS policies, and publishing constraints
 - required repository and module documentation files exist
+- local Node runtime pin exists for validation parity
 - environment template and committed secret guardrails pass
 - required crawl and standards files exist
 
