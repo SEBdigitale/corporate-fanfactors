@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "seo:apply": "node scripts/apply-seo.mjs",
     "seo:validate": "node scripts/validate-seo.mjs",
