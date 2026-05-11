@@ -15,18 +15,19 @@
     "file": "artists.html",
     "priority": "0.9",
     "changefreq": "weekly",
-    "image": "assets/images/artist-gold-singer.webp"
+    "image": "assets/images/funnel-rap-vocalist.jpg"
   },
   {
     "file": "fans.html",
     "priority": "0.9",
     "changefreq": "weekly",
-    "image": "assets/images/artist-pop-collective.webp"
+    "image": "assets/images/funnel-rainbow-vocalist.jpg"
   },
   {
     "file": "how-it-works.html",
     "priority": "0.9",
-    "changefreq": "weekly"
+    "changefreq": "weekly",
+    "image": "assets/images/funnel-drummer.jpg"
   },
   {
     "file": "how-it-works-artists.html",
@@ -36,37 +37,44 @@
   {
     "file": "the-problem.html",
     "priority": "0.8",
-    "changefreq": "monthly"
+    "changefreq": "monthly",
+    "image": "assets/images/funnel-green-mohawk-band.jpg"
   },
   {
     "file": "revolution.html",
     "priority": "0.8",
-    "changefreq": "monthly"
+    "changefreq": "monthly",
+    "image": "assets/images/funnel-metal-band.jpg"
   },
   {
     "file": "the-game.html",
     "priority": "0.7",
-    "changefreq": "monthly"
+    "changefreq": "monthly",
+    "image": "assets/images/funnel-dj-controller.jpg"
   },
   {
     "file": "movement.html",
     "priority": "0.7",
-    "changefreq": "monthly"
+    "changefreq": "monthly",
+    "image": "assets/images/funnel-afro-bassist.jpg"
   },
   {
     "file": "social-proof.html",
     "priority": "0.7",
-    "changefreq": "monthly"
+    "changefreq": "monthly",
+    "image": "assets/images/funnel-pink-frontwoman-trio.jpg"
   },
   {
     "file": "invite-system.html",
     "priority": "0.7",
-    "changefreq": "monthly"
+    "changefreq": "monthly",
+    "image": "assets/images/funnel-blues-guitarist.jpg"
   },
   {
     "file": "call-to-rebels.html",
     "priority": "0.7",
-    "changefreq": "monthly"
+    "changefreq": "monthly",
+    "image": "assets/images/funnel-horned-rebel.jpg"
   },
   {
     "file": "founding-fathers.html",
@@ -76,12 +84,14 @@
   {
     "file": "gears.html",
     "priority": "0.6",
-    "changefreq": "monthly"
+    "changefreq": "monthly",
+    "image": "assets/images/funnel-metal-vocalist-band.jpg"
   },
   {
     "file": "videos.html",
     "priority": "0.6",
-    "changefreq": "monthly"
+    "changefreq": "monthly",
+    "image": "assets/images/funnel-trumpet-player.jpg"
   },
   {
     "file": "media-press.html",
