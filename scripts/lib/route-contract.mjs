@@ -11,7 +11,7 @@ export function validateRouteContract(routes, vercelConfig, protectedLinks) {
       failures.push(`vercel.json: missing rewrite ${rewrite.source} -> ${rewrite.destination}`);
     }
 
-    if (rewrite.protected && !protectedLinks.includes(rewrite.destination.replace(/^\//, ''))) {
+    if (rewrite.protected && !protectedLinks.includes(rewrite.destination)) {
       failures.push(`data/site-navigation.json: protected route destination is missing: ${rewrite.destination}`);
     }
   }

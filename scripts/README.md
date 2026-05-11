@@ -1,6 +1,6 @@
 # Scripts
 
-This folder contains dependency-free Node.js scripts used to keep the static corporate site aligned with the AGENTS.md standards.
+This folder contains Node.js scripts used to keep the public static pages and migration contracts aligned with the AGENTS.md standards.
 
 ## Commands
 
@@ -8,6 +8,7 @@ This folder contains dependency-free Node.js scripts used to keep the static cor
 - `npm run site:validate`: validates pages, blog posts, metadata, navigation, local links, assets, crawl files, and required documentation.
 - `npm run supabase:validate`: validates the corporate blog Supabase migration contract.
 - `npm run security:validate`: validates the environment template and scans tracked source files for obvious committed secrets.
+- `npm run payload:env:check`: checks whether the local or shell environment is ready to boot Payload Admin.
 - `npm run validate`: runs the complete validation suite used by GitHub Actions.
 
 ## Structure

@@ -22,9 +22,8 @@ The validation job checks the static site contracts before Vercel receives new p
 - sitemap entries match indexable pages
 - header and footer links stay consistent
 - local links and assets resolve
-- `/indy` remains registered as a noindex admin prototype
+- `/indy` remains a compatibility rewrite to Payload Admin
 - Vercel rewrites match `data/site-routes.json`
-- Indy editor controls and local storage contract match `data/indy-admin.json`
 - blog post metadata matches static blog pages
 - Supabase blog migration keeps required tables, columns, RLS policies, and publishing constraints
 - required repository and module documentation files exist
@@ -34,4 +33,4 @@ The validation job checks the static site contracts before Vercel receives new p
 
 ## Why This Exists
 
-The corporate site is still static, so repeated markup can drift. This workflow keeps the current site stable while the codebase moves toward reusable components and a Supabase-backed publishing workflow.
+The public corporate pages are still static, so repeated markup can drift. This workflow keeps the current site stable while the codebase moves toward reusable components and a Payload-backed publishing workflow.

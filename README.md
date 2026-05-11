@@ -7,7 +7,7 @@ This package updates the prior FanFactors site around the actual platform story:
 - Artist-set pricing and rights control
 - Fans becoming music business owners through artist-approved selling
 - FanScore, quests, invites and social proof
-- Blog and static Admin Studio prototype
+- Blog and Payload Admin foundation
 - SEO and AI crawl foundation for the corporate domain
 - Supabase-ready blog publishing schema
 - The mission to make one billion millionaires through music-powered ownership
@@ -24,15 +24,15 @@ https://www.fanfactors.com
 
 For launch, switch the href values from staging to the live registration URL.
 
-## Admin area note
+## Admin Area
 
-The Admin Area is a polished static prototype. It demonstrates blog/page/campaign/KPI management but does not include real authentication or backend persistence. The dashboard draft form uses local browser storage only.
+`/admin` is now reserved for Payload Admin. The old static admin prototypes were removed so the repo has one admin direction only.
 
-`/indy` is the newer content-studio prototype for local blog CRUD, image/link fields, previews and future WYSIWYG planning. It is documented in `docs/indy-admin.md`.
+Payload is configured through `payload.config.ts` with modular collections in `collections/` for users, media, blog posts and pages. Details are documented in `docs/payload-admin.md`.
 
 ## Dynamic blog path
 
-Supabase is the preferred backend for the production blog platform. The first migration lives at:
+Payload is the production admin path for corporate publishing. The existing Supabase migration is retained as the shared corporate blog schema reference and can be applied if the site needs to expose content through Supabase-backed services:
 
 ```text
 supabase/migrations/20260510154500_create_corporate_blog.sql
@@ -40,7 +40,7 @@ supabase/migrations/20260510154500_create_corporate_blog.sql
 
 The recommended implementation path is documented in `docs/blog-platform.md`.
 
-Current static blog metadata lives in `data/blog-posts.json`, shaped to match the future Supabase publishing model.
+Current static blog metadata lives in `data/blog-posts.json`, shaped to match the future publishing model.
 The reusable validation rules live in `scripts/lib/blog-content.mjs`.
 
 ## SEO and AI discoverability
@@ -60,7 +60,7 @@ Ongoing SEO and AI requirements are documented in `docs/seo-ai-optimization.md`.
 
 Use Node.js 20 or newer for the validation scripts. `.nvmrc` and GitHub Actions are pinned to Node.js 20.
 
-The page/navigation registries and validation tooling keep repeated static markup safer while this remains a static site:
+The page/navigation registries and validation tooling keep repeated static markup safer while the public pages remain static and are served through Next.js:
 
 ```bash
 npm run seo:apply
@@ -75,6 +75,8 @@ Tooling details are documented in `docs/static-site-tooling.md`.
 
 Environment and secret-handling rules are documented in `docs/environment-security.md`.
 
+AGENTS.md migration progress is tracked in `docs/agents-alignment.md`.
+
 ## Quality gates
 
 GitHub Actions runs `npm run validate` on pushes to `main` and pull requests. The workflow is documented in `docs/quality-gates.md`.
@@ -83,7 +85,7 @@ GitHub Actions runs `npm run validate` on pushes to `main` and pull requests. Th
 
 ```bash
 cd fanfactors-music-back-v3
-python -m http.server 8000
+npm run dev
 ```
 
-Then open `http://localhost:8000`.
+Then open `http://localhost:3000`. Payload Admin is available at `http://localhost:3000/admin` after `DATABASE_URL` and `PAYLOAD_SECRET` are configured.

@@ -34,13 +34,11 @@
     "media-press.html",
     "https://staging.fanfactors.com",
     "blog.html",
-    "admin.html",
+    "/admin",
     "contact.html",
     "faq.html"
   ],
   "protectedLinks": [
-    "admin.html",
-    "admin-dashboard.html",
-    "indy.html"
+    "/admin"
   ]
 }

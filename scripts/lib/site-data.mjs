@@ -29,10 +29,3 @@ export function loadBlogPostRegistry(rootDir = process.cwd()) {
 export function loadRouteRegistry(rootDir = process.cwd()) {
   return loadJsonFile(rootDir, 'data/site-routes.json');
 }
-
-/**
- * Loads the static Indy admin prototype contract.
- */
-export function loadIndyAdminRegistry(rootDir = process.cwd()) {
-  return loadJsonFile(rootDir, 'data/indy-admin.json');
-}

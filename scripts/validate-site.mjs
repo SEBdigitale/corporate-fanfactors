@@ -3,17 +3,15 @@ import path from 'node:path';
 import { validateAccessibilityContract } from './lib/accessibility-contract.mjs';
 import { validateBlogPostContract } from './lib/blog-content.mjs';
 import { validateDocumentationContract } from './lib/docs-contract.mjs';
-import { validateIndyAdminContract } from './lib/indy-contract.mjs';
 import { validateRouteContract } from './lib/route-contract.mjs';
 import { canonicalUrl, loadPageRegistry } from './lib/seo.mjs';
-import { loadBlogPostRegistry, loadIndyAdminRegistry, loadJsonFile, loadNavigationRegistry, loadRouteRegistry } from './lib/site-data.mjs';
+import { loadBlogPostRegistry, loadJsonFile, loadNavigationRegistry, loadRouteRegistry } from './lib/site-data.mjs';
 
 const rootDir = process.cwd();
 const pages = loadPageRegistry(rootDir);
 const navigation = loadNavigationRegistry(rootDir);
 const blogPosts = loadBlogPostRegistry(rootDir);
 const routes = loadRouteRegistry(rootDir);
-const indyAdmin = loadIndyAdminRegistry(rootDir);
 const vercelConfig = loadJsonFile(rootDir, 'vercel.json');
 const registeredFiles = new Set(pages.map((page) => page.file));
 const pagesByFile = new Map(pages.map((page) => [page.file, page]));
@@ -33,6 +31,8 @@ function assertExistingLocalTarget(sourceFile, rawValue, attribute) {
 
   const targetPath = path.normalize(path.join(path.dirname(sourceFile), value));
   const fullTargetPath = path.join(rootDir, targetPath);
+
+  if (value === '/admin') return;
 
   if (!fs.existsSync(fullTargetPath)) {
     failures.push(`${sourceFile}: ${attribute} target does not exist: ${rawValue}`);
@@ -96,8 +96,8 @@ function validateNavigationForPage(page, html) {
 
   for (const href of navigation.protectedLinks) {
     const linkedFromPublicPage = page.index !== false && html.includes(`href="${href}"`);
-    if (linkedFromPublicPage && href === 'admin-dashboard.html') {
-      failures.push(`${page.file}: public page should not link directly to protected dashboard ${href}`);
+    if (linkedFromPublicPage && href !== '/admin') {
+      failures.push(`${page.file}: public page should not link directly to deprecated admin route ${href}`);
     }
   }
 }
@@ -166,27 +166,6 @@ function validateRoutes() {
   failures.push(...validateRouteContract(routes, vercelConfig, navigation.protectedLinks));
 }
 
-function validateIndyAdmin() {
-  const htmlPath = path.join(rootDir, indyAdmin.page);
-  const scriptPath = path.join(rootDir, indyAdmin.script);
-
-  if (!fs.existsSync(htmlPath)) {
-    failures.push(`${indyAdmin.page}: Indy admin page is missing`);
-    return;
-  }
-
-  if (!fs.existsSync(scriptPath)) {
-    failures.push(`${indyAdmin.script}: Indy admin script is missing`);
-    return;
-  }
-
-  failures.push(...validateIndyAdminContract(
-    indyAdmin,
-    fs.readFileSync(htmlPath, 'utf8'),
-    fs.readFileSync(scriptPath, 'utf8'),
-  ));
-}
-
 for (const page of pages) {
   const pagePath = path.join(rootDir, page.file);
   if (!fs.existsSync(pagePath)) {
@@ -204,7 +183,6 @@ for (const page of pages) {
 validateBlogPostRegistry();
 validateDocumentation();
 validateRoutes();
-validateIndyAdmin();
 
 for (const file of fs.readdirSync(rootDir).filter((item) => item.endsWith('.html'))) {
   if (!registeredFiles.has(file)) {
@@ -225,9 +203,30 @@ for (const page of pages.filter((item) => item.index === false)) {
   }
 }
 
-for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', '.env.example', '.nvmrc', 'vercel.json', 'data/site-navigation.json', 'data/site-routes.json', 'data/blog-posts.json', 'data/indy-admin.json', 'supabase/migrations/20260510154500_create_corporate_blog.sql']) {
+for (const requiredFile of ['robots.txt', 'sitemap.xml', 'llms.txt', '.env.example', '.nvmrc', 'vercel.json', 'data/site-navigation.json', 'data/site-routes.json', 'data/blog-posts.json', 'payload.config.ts', 'services/payloadBlog.ts', 'services/payloadBlogSeed.ts', 'components/blog/BlogCard.tsx', 'components/blog/BlogShell.tsx', 'components/blog/RichText.tsx', 'app/(site)/blog/page.tsx', 'app/(site)/blog/[slug]/page.tsx', 'scripts/check-payload-env.mjs', 'scripts/seed-payload-blog.ts', 'types/payload-types.ts', 'types/payload-content.ts', 'supabase/migrations/20260510154500_create_corporate_blog.sql']) {
   if (!fs.existsSync(path.join(rootDir, requiredFile))) {
     failures.push(`${requiredFile}: required repository file is missing`);
+  }
+}
+
+const payloadTypes = fs.readFileSync(path.join(rootDir, 'types/payload-types.ts'), 'utf8');
+for (const expectedType of ['export interface Config', 'export interface BlogPost', 'export interface Page', 'export interface Media', 'export interface User']) {
+  if (!payloadTypes.includes(expectedType)) {
+    failures.push(`types/payload-types.ts: missing generated Payload type ${expectedType}`);
+  }
+}
+
+const payloadSeedService = fs.readFileSync(path.join(rootDir, 'services/payloadBlogSeed.ts'), 'utf8');
+for (const expectedSeedExport of ['buildPayloadBlogSeedPost', 'extractArticleBlocks', 'StaticBlogRegistryEntry']) {
+  if (!payloadSeedService.includes(expectedSeedExport)) {
+    failures.push(`services/payloadBlogSeed.ts: missing Payload seed export ${expectedSeedExport}`);
+  }
+}
+
+const payloadBlogService = fs.readFileSync(path.join(rootDir, 'services/payloadBlog.ts'), 'utf8');
+for (const expectedBlogExport of ['getPublishedBlogPosts', 'getPublishedBlogPostBySlug', 'getBlogPostImagePath']) {
+  if (!payloadBlogService.includes(expectedBlogExport)) {
+    failures.push(`services/payloadBlog.ts: missing Payload blog export ${expectedBlogExport}`);
   }
 }
 
@@ -240,4 +239,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${pages.length} pages, ${blogPosts.length} blog posts, SEO metadata, accessibility, Indy admin, routes, navigation, documentation, local links, assets, and crawl files.`);
+console.log(`Validated ${pages.length} pages, ${blogPosts.length} blog posts, SEO metadata, accessibility, Payload admin routing, navigation, documentation, local links, assets, and crawl files.`);

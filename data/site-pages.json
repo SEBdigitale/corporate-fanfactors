@@ -135,17 +135,5 @@
     "changefreq": "monthly",
     "image": "assets/images/artist-hiphop-crew.webp",
     "schemaType": "Article"
-  },
-  {
-    "file": "admin.html",
-    "index": false
-  },
-  {
-    "file": "admin-dashboard.html",
-    "index": false
-  },
-  {
-    "file": "indy.html",
-    "index": false
   }
 ]

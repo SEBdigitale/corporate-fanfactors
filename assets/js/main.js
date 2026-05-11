@@ -103,15 +103,3 @@
     });
   });
 })();
-
-// v3 admin demo behavior
-(function(){
-  const adminLogin = document.querySelector('[data-admin-login]');
-  if(adminLogin){adminLogin.addEventListener('submit', function(e){e.preventDefault(); window.location.href='admin-dashboard.html';});}
-  const form = document.querySelector('[data-admin-post-form]');
-  const list = document.querySelector('[data-draft-list]');
-  const key = 'fanfactors-v3-drafts';
-  function esc(s){return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
-  function render(){if(!list)return; const drafts=JSON.parse(localStorage.getItem(key)||'[]'); list.innerHTML=drafts.length?drafts.map(d=>`<div class="draft-item"><strong>${esc(d.title)}</strong><span>${esc(d.cat)} · ${esc(d.summary)}</span><em>Local draft</em></div>`).join(''):'<div class="draft-item"><strong>No local drafts yet.</strong><span>Create a demo draft above. It stores in this browser only.</span><em>Demo</em></div>';}
-  if(form){render(); form.addEventListener('submit', function(e){e.preventDefault(); const fd=new FormData(form); const drafts=JSON.parse(localStorage.getItem(key)||'[]'); drafts.unshift({title:fd.get('title'),cat:fd.get('category'),summary:fd.get('summary')}); localStorage.setItem(key,JSON.stringify(drafts.slice(0,10))); form.reset(); render();});}
-})();

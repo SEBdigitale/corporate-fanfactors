@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The corporate site is still a static deployment, but metadata and crawl files should be generated from reusable modules instead of edited by hand on every page.
+The public corporate pages are still static HTML, but the repo now runs through Next.js so Payload can own `/admin`. Metadata and crawl files should still be generated from reusable modules instead of edited by hand on every page.
 
 ## Page Registry
 
@@ -13,7 +13,6 @@ The corporate site is still a static deployment, but metadata and crawl files sh
 - sitemap change frequency
 - social preview image
 - schema type
-- noindex admin pages
 
 ## Navigation Registry
 
@@ -23,11 +22,11 @@ The corporate site is still a static deployment, but metadata and crawl files sh
 - expected footer links
 - protected admin links
 
-The current site still duplicates the header and footer in each HTML file. The validator protects that duplicated shell until the site moves to component templates or Next.js components.
+The current public site still duplicates the header and footer in each HTML file. The validator protects that duplicated shell until those pages move to component templates or Next.js components.
 
 ## Route Registry
 
-`data/site-routes.json` is the source of truth for clean Vercel rewrites such as `/indy`.
+`data/site-routes.json` is the source of truth for compatibility rewrites such as `/indy` to `/admin`.
 
 ## Blog Registry
 
@@ -40,10 +39,6 @@ The validator checks that registered blog posts:
 - map to an `Article` page in `data/site-pages.json`
 - appear on `blog.html`
 - include their registry title, excerpt, category, SEO title, SEO description, and featured image
-
-## Indy Admin Registry
-
-`data/indy-admin.json` protects the local admin prototype contract until it is replaced by a Supabase-backed editor.
 
 ## Scripts
 
@@ -68,7 +63,7 @@ npm run validate
 - images and buttons have accessible names
 - each page has exactly one canonical URL
 - JSON-LD is valid JSON
-- admin pages have `noindex`
+- Payload admin compatibility rewrites stay aligned with Vercel
 - expected header and footer links are present on each page
 - registered blog posts match their static pages
 - required module documentation files exist
@@ -79,4 +74,4 @@ npm run validate
 
 ## Migration Note
 
-When this site moves to Next.js, the registry can become route metadata in `app/`, and the validation rules should move into a test or build check.
+As public pages move to React components, the registry can become route metadata in `app/`, and the validation rules should move into a test or build check.

@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/indy",
-      "destination": "/indy.html"
+      "destination": "/admin"
     }
   ]
 }
