@@ -7,9 +7,12 @@ import { getPublishedBlogPosts } from '@/services/payloadBlog'
 
 export const dynamic = 'force-dynamic'
 
+const blogDescription =
+  'FanFactors helps musicians and groups turn their music into a legal social marketplace, giving artists more control over pricing, discovery, and direct fan support while giving fans a real role in backing and sharing the music they believe in.'
+
 export const metadata: Metadata = {
   title: 'Payload Blog | FanFactors',
-  description: 'Server-rendered FanFactors blog powered by Payload CMS.',
+  description: blogDescription,
   robots: {
     index: false,
     follow: false,
@@ -24,7 +27,7 @@ export default async function BlogPage() {
       <section className={styles.hero}>
         <span className={styles.eyebrow}>Payload CMS</span>
         <h1>FanFactors Blog</h1>
-        <p>Published posts rendered server-side from the Supabase-backed Payload database.</p>
+        <p>{blogDescription}</p>
       </section>
       {posts.length > 0 ? (
         <section className={styles.grid} aria-label="Published posts">
