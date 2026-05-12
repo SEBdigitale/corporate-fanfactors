@@ -18,6 +18,9 @@ const blobToken = process.env.BLOB_READ_WRITE_TOKEN
 
 export default buildConfig({
   admin: {
+    components: {
+      views: {},
+    },
     user: Users.slug,
   },
   collections: [Users, Media, BlogPosts, Pages],
