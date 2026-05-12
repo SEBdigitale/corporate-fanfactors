@@ -13,12 +13,11 @@ export function BlogShell({ children }: BlogShellProps) {
       <header className={styles.header}>
         <div className={styles.headerInner}>
           <Link className={styles.brand} href="/">
-            FanFactors
+            <img src="/assets/images/fanfactors-wordmark-dark.png" alt="FanFactors" />
           </Link>
           <nav className={styles.nav} aria-label="Blog navigation">
             <Link href="/blog">Blog</Link>
             <Link href="/admin">Payload Admin</Link>
-            <Link href="/blog.html">Static Blog</Link>
           </nav>
         </div>
       </header>
