@@ -4,6 +4,15 @@ import { withPayload } from '@payloadcms/next/withPayload'
 const nextConfig = {
   poweredByHeader: false,
   reactCompiler: false,
+  outputFileTracingIncludes: {
+    '/*': [
+      './*.html',
+      './assets/**/*',
+      './llms.txt',
+      './robots.txt',
+      './sitemap.xml',
+    ],
+  },
   turbopack: {
     root: process.cwd(),
   },
