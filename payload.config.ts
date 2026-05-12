@@ -39,7 +39,6 @@ export default buildConfig({
   plugins: blobToken
     ? [
         vercelBlobStorage({
-          clientUploads: true,
           collections: {
             media: true,
           },

@@ -42,9 +42,9 @@ Do not expose database credentials or service-role keys to browser code.
 
 `BLOB_READ_WRITE_TOKEN` must come from a Vercel Blob store connected to the Vercel project. Payload stores media metadata in the Supabase-backed Postgres database and stores uploaded files in Vercel Blob, because Vercel serverless deployments cannot persist uploads on local disk.
 
-Production media uploads use the public Vercel Blob store `corporate-fanfactors-payload-media`. If uploads fail with Payload's generic "Something went wrong" toast, first confirm `BLOB_READ_WRITE_TOKEN` exists in the Vercel Production environment and redeploy after adding or rotating it.
+Production media uploads use the public Vercel Blob store `corporate-fanfactors-payload-media` through Payload's server-side storage adapter. If uploads fail with Payload's generic "Something went wrong" toast, first confirm `BLOB_READ_WRITE_TOKEN` exists in the Vercel Production environment and redeploy after adding or rotating it.
 
-The Vercel Blob adapter is configured with client uploads enabled so larger blog images upload directly to Blob instead of passing through Vercel's serverless body-size limit.
+Keep uploaded blog images reasonably compressed for the server-side Payload upload route. If the site later needs very large media uploads, generate Payload's import map as part of the build before re-enabling Blob client uploads.
 
 For Supabase, use the **Session Pooler** connection string for local IPv4 networks. Direct Supabase database URLs may require IPv6 and can fail locally. The working local shape is:
 
