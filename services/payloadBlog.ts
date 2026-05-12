@@ -5,10 +5,11 @@ import staticBlogPosts from '@/data/blog-posts.json'
 import type { PayloadBlogPost } from '@/types/payload-content'
 
 const BLOG_LIMIT = 24
+let payloadClientPromise: ReturnType<typeof getPayload> | null = null
 
 export async function getPublishedBlogPosts(): Promise<PayloadBlogPost[]> {
   try {
-    const payload = await getPayload({ config })
+    const payload = await getPayloadClient()
     const result = await payload.find({
       collection: 'blog-posts',
       depth: 1,
@@ -32,7 +33,7 @@ export async function getPublishedBlogPosts(): Promise<PayloadBlogPost[]> {
 
 export async function getPublishedBlogPostBySlug(slug: string): Promise<PayloadBlogPost | null> {
   try {
-    const payload = await getPayload({ config })
+    const payload = await getPayloadClient()
     const result = await payload.find({
       collection: 'blog-posts',
       depth: 1,
@@ -79,6 +80,12 @@ function normalizePublicPath(path: string) {
   }
 
   return path.startsWith('/') ? path : `/${path}`
+}
+
+function getPayloadClient() {
+  payloadClientPromise ??= getPayload({ config })
+
+  return payloadClientPromise
 }
 
 function getStaticPublishedBlogPosts(): PayloadBlogPost[] {

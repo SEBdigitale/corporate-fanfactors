@@ -52,18 +52,20 @@ For Supabase, use the **Session Pooler** connection string for local IPv4 networ
 postgresql://postgres.<project-ref>:<password>@aws-1-us-east-1.pooler.supabase.com:5432/postgres
 ```
 
-Payload's Postgres adapter keeps one connection open for reconnect handling, so the pool must allow additional query connections. The production config uses a small pool with SSL enabled for Supabase:
+Payload runs on Vercel serverless functions, so the Postgres pool must stay small and release idle connections quickly. The production config uses a small SSL pool for Supabase and reuses the Payload client inside each function instance:
 
 ```ts
 pool: {
-  max: 3,
+  allowExitOnIdle: true,
+  idleTimeoutMillis: 1000,
+  max: 2,
   ssl: {
     rejectUnauthorized: false,
   },
 }
 ```
 
-Do not reduce the pool to `max: 1`; it can make Payload boot but then starve the first real admin query.
+Do not increase the pool casually. Supabase's free session pooler has a low connection limit, and too many concurrent Vercel instances can make the blog fall back to static posts instead of showing live Payload edits.
 
 Check whether the admin can boot:
 

@@ -26,10 +26,11 @@ export default buildConfig({
   collections: [Users, Media, BlogPosts, Pages],
   db: postgresAdapter({
     pool: {
+      allowExitOnIdle: true,
       connectionString: process.env.DATABASE_URL || '',
       connectionTimeoutMillis: 15000,
-      idleTimeoutMillis: 10000,
-      max: 3,
+      idleTimeoutMillis: 1000,
+      max: 2,
       ssl: {
         rejectUnauthorized: false,
       },
