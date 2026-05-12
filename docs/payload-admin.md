@@ -73,6 +73,14 @@ Check whether the admin can boot:
 npm run payload:env:check
 ```
 
+Check whether media uploads are really reaching persistent Vercel Blob storage:
+
+```bash
+npm run payload:verify-blob
+```
+
+The Blob verification script creates a tiny temporary media record, verifies the production media URL can serve it, and deletes the temporary record afterward. Run it after adding or rotating `BLOB_READ_WRITE_TOKEN`, `DATABASE_URL`, or `PAYLOAD_SECRET` in Vercel.
+
 ## Login Flow
 
 Payload creates the first admin user from `/admin` after the database and secret are configured.
