@@ -15,6 +15,7 @@ const routes = loadRouteRegistry(rootDir);
 const vercelConfig = loadJsonFile(rootDir, 'vercel.json');
 const registeredFiles = new Set(pages.map((page) => page.file));
 const pagesByFile = new Map(pages.map((page) => [page.file, page]));
+const dynamicRoutes = new Set(['/admin', '/blog']);
 const failures = [];
 
 function stripHashAndQuery(value) {
@@ -32,7 +33,7 @@ function assertExistingLocalTarget(sourceFile, rawValue, attribute) {
   const targetPath = path.normalize(path.join(path.dirname(sourceFile), value));
   const fullTargetPath = path.join(rootDir, targetPath);
 
-  if (value === '/admin') return;
+  if (dynamicRoutes.has(value)) return;
 
   if (!fs.existsSync(fullTargetPath)) {
     failures.push(`${sourceFile}: ${attribute} target does not exist: ${rawValue}`);

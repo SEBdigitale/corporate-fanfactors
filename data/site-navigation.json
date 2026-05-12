@@ -18,7 +18,7 @@
     "about.html",
     "gears.html",
     "videos.html",
-    "blog.html",
+    "/blog",
     "contact.html",
     "https://staging.fanfactors.com"
   ],
@@ -33,7 +33,7 @@
     "founding-fathers.html",
     "media-press.html",
     "https://staging.fanfactors.com",
-    "blog.html",
+    "/blog",
     "/admin",
     "contact.html",
     "faq.html"

@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server'
 
 const ROOT_DIR = process.cwd()
 const ADMIN_ALIASES = new Set(['admin.html', 'admin-dashboard.html', 'indy', 'indy.html'])
+const PAYLOAD_BLOG_ALIASES = new Set(['blog.html'])
 const TOP_LEVEL_FILES = new Set(['index.html', 'robots.txt', 'sitemap.xml', 'llms.txt'])
 
 const CONTENT_TYPES: Record<string, string> = {
@@ -26,7 +27,12 @@ function resolveStaticPath(segments: string[] = []) {
   const normalizedPath = rawPath.endsWith('/') ? `${rawPath}index.html` : rawPath
   const aliasPath = rawPath.replace(/\/$/, '')
 
-  if (ADMIN_ALIASES.has(aliasPath) || ADMIN_ALIASES.has(normalizedPath)) {
+  if (
+    ADMIN_ALIASES.has(aliasPath) ||
+    ADMIN_ALIASES.has(normalizedPath) ||
+    PAYLOAD_BLOG_ALIASES.has(aliasPath) ||
+    PAYLOAD_BLOG_ALIASES.has(normalizedPath)
+  ) {
     return {
       filePath: '',
       rawPath: aliasPath,
@@ -62,6 +68,10 @@ export async function serveStaticSiteFile(requestUrl: string, segments: string[]
 
   if (ADMIN_ALIASES.has(target.rawPath)) {
     return NextResponse.redirect(new URL('/admin', requestUrl), 308)
+  }
+
+  if (PAYLOAD_BLOG_ALIASES.has(target.rawPath)) {
+    return NextResponse.redirect(new URL('/blog', requestUrl), 308)
   }
 
   try {

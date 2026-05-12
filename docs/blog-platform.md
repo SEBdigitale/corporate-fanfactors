@@ -51,6 +51,8 @@ The Next.js app now includes server-rendered Payload blog routes:
 
 The routes use `services/payloadBlog.ts` for Payload reads and reusable components under `components/blog/`. Existing static `.html` blog pages remain in place as launch fallbacks while the broader public site migration continues.
 
+Public site navigation now points to `/blog`, and the legacy `blog.html` URL redirects to `/blog`, so newly published Payload posts are visible from the normal Blog entry point.
+
 The validation rules in `scripts/lib/blog-content.mjs` mirror the current Supabase constraints for:
 
 - title length
