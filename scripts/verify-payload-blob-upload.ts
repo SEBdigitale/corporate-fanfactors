@@ -44,18 +44,19 @@ async function verifyPayloadBlobUpload() {
       throw new Error('BLOB_READ_WRITE_TOKEN is missing or invalid.')
     }
 
-    await head(`https://${storeId.toLowerCase()}.public.blob.vercel-storage.com/${filename}`, {
+    const blobUrl = `https://${storeId.toLowerCase()}.public.blob.vercel-storage.com/${filename}`
+
+    await head(blobUrl, {
       token: process.env.BLOB_READ_WRITE_TOKEN,
     })
 
-    const absoluteUrl = new URL(url, siteUrl).toString()
-    const response = await fetch(absoluteUrl, { method: 'HEAD' })
+    const response = await fetch(blobUrl, { method: 'HEAD' })
 
     if (!response.ok) {
-      throw new Error(`Media URL failed with HTTP ${response.status}: ${absoluteUrl}`)
+      throw new Error(`Blob media URL failed with HTTP ${response.status}: ${blobUrl}`)
     }
 
-    payload.logger.info(`Payload Blob upload verified: ${absoluteUrl}`)
+    payload.logger.info(`Payload Blob upload verified: ${new URL(url, siteUrl).toString()} -> ${blobUrl}`)
   } finally {
     await payload.delete({
       id: media.id,

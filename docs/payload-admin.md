@@ -44,6 +44,8 @@ Do not expose database credentials or service-role keys to browser code.
 
 Production media uploads use the public Vercel Blob store `corporate-fanfactors-payload-media` through Payload's server-side storage adapter. If uploads fail with Payload's generic "Something went wrong" toast, first confirm `BLOB_READ_WRITE_TOKEN` exists in the Vercel Production environment and redeploy after adding or rotating it.
 
+The public blog renders uploaded media with direct public Vercel Blob URLs derived server-side from `BLOB_READ_WRITE_TOKEN`. This avoids relying on Payload's `/api/media/file/*` proxy for published blog images.
+
 Keep uploaded blog images reasonably compressed for the server-side Payload upload route. Payload's import map is generated during `npm run build` so the Vercel Blob storage admin component is available in production.
 
 For Supabase, use the **Session Pooler** connection string for local IPv4 networks. Direct Supabase database URLs may require IPv6 and can fail locally. The working local shape is:

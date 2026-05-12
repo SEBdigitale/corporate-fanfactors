@@ -67,7 +67,7 @@ export function getBlogPostImagePath(post: PayloadBlogPost) {
   const uploadUrl = typeof post.featuredImage === 'object' ? post.featuredImage?.url : null
   const sourcePath = post.source?.featuredImagePath
 
-  return normalizePublicPath(uploadUrl || sourcePath || 'assets/images/artist-hiphop-crew.webp')
+  return normalizePublicPath(toPersistentMediaUrl(uploadUrl) || sourcePath || 'assets/images/artist-hiphop-crew.webp')
 }
 
 export function getBlogPostTags(post: PayloadBlogPost) {
@@ -80,6 +80,30 @@ function normalizePublicPath(path: string) {
   }
 
   return path.startsWith('/') ? path : `/${path}`
+}
+
+function toPersistentMediaUrl(path?: null | string) {
+  if (!path) {
+    return null
+  }
+
+  if (/^https?:\/\//.test(path)) {
+    return path
+  }
+
+  const mediaFilePrefix = '/api/media/file/'
+  if (!path.startsWith(mediaFilePrefix)) {
+    return path
+  }
+
+  const storeId = process.env.BLOB_READ_WRITE_TOKEN?.match(/^vercel_blob_rw_([a-z\d]+)_/i)?.[1]
+  if (!storeId) {
+    return path
+  }
+
+  const filename = path.slice(mediaFilePrefix.length)
+
+  return `https://${storeId.toLowerCase()}.public.blob.vercel-storage.com/${filename}`
 }
 
 function getPayloadClient() {
