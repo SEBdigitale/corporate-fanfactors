@@ -10,9 +10,11 @@ export async function GET() {
   return Response.json(
     {
       blobTokenFormatValid: Boolean(blobToken && blobTokenPattern.test(blobToken)),
+      databaseUrlLooksValid: Boolean(databaseUrl?.startsWith('postgresql://')),
       hasBlobToken: Boolean(blobToken),
       hasDatabaseUrl: Boolean(databaseUrl),
       hasPayloadSecret: Boolean(payloadSecret),
+      payloadSecretLength: payloadSecret?.length ?? 0,
       nodeEnv: process.env.NODE_ENV,
       vercelEnv: process.env.VERCEL_ENV,
     },
