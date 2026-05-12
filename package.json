@@ -25,6 +25,7 @@
     "@payloadcms/db-postgres": "^3.84.1",
     "@payloadcms/next": "^3.84.1",
     "@payloadcms/richtext-lexical": "^3.84.1",
+    "@payloadcms/storage-vercel-blob": "^3.84.1",
     "@types/node": "^25.6.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

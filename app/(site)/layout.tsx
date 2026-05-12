@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 
+import './site.css'
+
 type SiteLayoutProps = {
   children: ReactNode
 }

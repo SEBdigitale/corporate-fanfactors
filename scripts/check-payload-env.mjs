@@ -26,6 +26,10 @@ if (isNonEmptyString(env.DATABASE_URL) && !/^postgres(?:ql)?:\/\//.test(env.DATA
   failures.push('DATABASE_URL must be a Postgres connection string.');
 }
 
+if (env.VERCEL === '1' && !isNonEmptyString(env.BLOB_READ_WRITE_TOKEN)) {
+  failures.push('BLOB_READ_WRITE_TOKEN is required on Vercel for Payload media uploads.');
+}
+
 if (failures.length > 0) {
   console.error(failures.join('\n'));
   process.exit(1);

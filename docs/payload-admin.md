@@ -12,6 +12,7 @@
 - Collection definitions live in `collections/`.
 - Generated Payload types live in `types/payload-types.ts`.
 - Shared content type aliases live in `types/payload-content.ts`.
+- Payload media uploads use Vercel Blob storage in production.
 - Public static pages are preserved through `app/[[...path]]/route.ts` and `lib/static-site.ts`.
 
 ## Collections
@@ -28,6 +29,7 @@ Required server-side values:
 ```bash
 DATABASE_URL=
 PAYLOAD_SECRET=
+BLOB_READ_WRITE_TOKEN=
 ```
 
 Optional public value:
@@ -37,6 +39,8 @@ NEXT_PUBLIC_SITE_URL=
 ```
 
 Do not expose database credentials or service-role keys to browser code.
+
+`BLOB_READ_WRITE_TOKEN` must come from a Vercel Blob store connected to the Vercel project. Payload stores media metadata in the Supabase-backed Postgres database and stores uploaded files in Vercel Blob, because Vercel serverless deployments cannot persist uploads on local disk.
 
 For Supabase, use the **Session Pooler** connection string for local IPv4 networks. Direct Supabase database URLs may require IPv6 and can fail locally. The working local shape is:
 
@@ -72,7 +76,7 @@ npm run build
 npm run start
 ```
 
-Before production launch, provide a production Postgres database for Payload, set a strong `PAYLOAD_SECRET`, run Payload migrations, and create the first admin user through `/admin`.
+Before production launch, provide a production Postgres database for Payload, set a strong `PAYLOAD_SECRET`, connect Vercel Blob for media uploads, run Payload migrations, and create the first admin user through `/admin`.
 
 Regenerate types after changing Payload collections:
 

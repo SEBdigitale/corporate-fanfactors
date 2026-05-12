@@ -8,6 +8,7 @@ Payload Admin should use:
 
 - `DATABASE_URL`
 - `PAYLOAD_SECRET`
+- `BLOB_READ_WRITE_TOKEN`
 - `NEXT_PUBLIC_SITE_URL`
 
 Retained Supabase-backed services should use:
@@ -21,7 +22,7 @@ Use `.env.example` as the template only. Real values must live in Vercel Environ
 ## Secret Handling
 
 - Never commit `.env` files.
-- Never expose `DATABASE_URL` or `PAYLOAD_SECRET` in browser code.
+- Never expose `DATABASE_URL`, `PAYLOAD_SECRET`, or `BLOB_READ_WRITE_TOKEN` in browser code.
 - Never expose `SUPABASE_SERVICE_ROLE_KEY` in browser code.
 - Keep service-role access server-side only.
 - Use Row Level Security for public/client Supabase access.

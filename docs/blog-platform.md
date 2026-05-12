@@ -53,6 +53,8 @@ The routes use `services/payloadBlog.ts` for Payload reads and reusable componen
 
 Public site navigation now points to `/blog`, and the legacy `blog.html` URL redirects to `/blog`, so newly published Payload posts are visible from the normal Blog entry point.
 
+Featured images are managed through Payload's `media` collection. Production uploads require the Vercel Blob storage adapter and `BLOB_READ_WRITE_TOKEN`; without that token, Payload can save post metadata but cannot persist uploaded image files on Vercel.
+
 The validation rules in `scripts/lib/blog-content.mjs` mirror the current Supabase constraints for:
 
 - title length
