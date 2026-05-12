@@ -123,6 +123,14 @@
     "schemaType": "Article"
   },
   {
+    "file": "blog-taking-music-back.html",
+    "priority": "0.8",
+    "changefreq": "monthly",
+    "image": "assets/images/artist-hiphop-crew.webp",
+    "schemaType": "Article",
+    "index": false
+  },
+  {
     "file": "blog-direct-pay.html",
     "priority": "0.8",
     "changefreq": "monthly",

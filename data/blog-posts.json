@@ -1,5 +1,19 @@
 [
   {
+    "title": "We’re Taking Music Back: The Meaning Behind the Movement",
+    "slug": "were-taking-music-back",
+    "file": "blog-taking-music-back.html",
+    "excerpt": "Before billion-dollar streaming platforms, before algorithms controlled discovery, and before artists were forced to chase fractions of a penny just to survive, music was something personal.",
+    "category": "movement",
+    "tags": ["we're taking music back", "fanfactors", "the music revolution"],
+    "featuredImage": "assets/images/artist-hiphop-crew.webp",
+    "socialImage": "assets/images/artist-hiphop-crew.webp",
+    "status": "published",
+    "publishedAt": "2026-05-12T04:00:00.000Z",
+    "seoTitle": "We’re Taking Music Back: The Meaning Behind the Movement — FanFactors Blog",
+    "seoDescription": "FanFactors is taking music back by giving artists, groups and fans a legal marketplace where music value can move directly through the people who create and support it."
+  },
+  {
     "title": "Fan Owners: The Next Music Business Model",
     "slug": "fan-owners-next-music-business-model",
     "file": "blog-fan-owners.html",
