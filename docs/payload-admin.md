@@ -48,6 +48,19 @@ For Supabase, use the **Session Pooler** connection string for local IPv4 networ
 postgresql://postgres.<project-ref>:<password>@aws-1-us-east-1.pooler.supabase.com:5432/postgres
 ```
 
+Payload's Postgres adapter keeps one connection open for reconnect handling, so the pool must allow additional query connections. The production config uses a small pool with SSL enabled for Supabase:
+
+```ts
+pool: {
+  max: 3,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+}
+```
+
+Do not reduce the pool to `max: 1`; it can make Payload boot but then starve the first real admin query.
+
 Check whether the admin can boot:
 
 ```bash
