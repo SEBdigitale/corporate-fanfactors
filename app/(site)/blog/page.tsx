@@ -11,7 +11,7 @@ const blogDescription =
   'FanFactors helps musicians and groups turn their music into a legal social marketplace, giving artists more control over pricing, discovery, and direct fan support while giving fans a real role in backing and sharing the music they believe in.'
 
 export const metadata: Metadata = {
-  title: 'Payload Blog | FanFactors',
+  title: 'FanFactors Blog | FanFactors',
   description: blogDescription,
   robots: {
     index: false,
@@ -25,7 +25,7 @@ export default async function BlogPage() {
   return (
     <BlogShell>
       <section className={styles.hero}>
-        <span className={styles.eyebrow}>Payload CMS</span>
+        <span className={styles.eyebrow}>We&apos;re taking music back™</span>
         <h1>FanFactors Blog</h1>
         <p>{blogDescription}</p>
       </section>

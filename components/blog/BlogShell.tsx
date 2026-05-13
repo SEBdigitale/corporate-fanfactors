@@ -17,7 +17,6 @@ export function BlogShell({ children }: BlogShellProps) {
           </Link>
           <nav className={styles.nav} aria-label="Blog navigation">
             <Link href="/blog">Blog</Link>
-            <Link href="/admin">Payload Admin</Link>
           </nav>
         </div>
       </header>
