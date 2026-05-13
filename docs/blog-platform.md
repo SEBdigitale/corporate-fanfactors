@@ -6,13 +6,13 @@ The corporate blog should become the daily publishing engine for FanFactors. It 
 
 ## Recommended Path
 
-Use Payload Admin as the production CMS inside the Next.js App Router app. Keep the existing Supabase migration as a compatibility/reference schema until the final content database decision is locked.
+Use Payload Admin as the production CMS inside the Next.js App Router app, but keep the public blog indexable and stable through typed Next.js content modules while Payload production writes are being hardened. Keep the existing Supabase migration as a compatibility/reference schema until the final content database decision is locked.
 
 1. Keep the current public static pages live through the Next.js static-file route handler.
 2. Use Payload Admin at `/admin` for authenticated editor workflows.
 3. Model blog posts, pages, media and users in modular Payload collections.
-4. Render public blog pages server-side from Payload once dynamic routes replace the static launch pages.
-5. Seed `data/blog-posts.json` into Payload with `npm run payload:seed:blog` after the database is configured. This has been completed for the Supabase-backed Payload database.
+4. Render the public SEO blog from typed cluster content in `content/blogClusters.ts` and `content/blogPosts.ts` so public pages do not fail when the admin has a production save issue.
+5. Sync Payload back into the typed content source only after production publish and media workflows are verified end to end.
 
 ## Content Model
 
@@ -25,7 +25,7 @@ Posts should include:
 - featured image URL
 - category
 - tags
-- draft or published status
+- Payload draft or published status
 - SEO title
 - SEO description
 - social image URL
@@ -42,18 +42,40 @@ The registry is intentionally small and only includes published posts. It gives 
 
 The local Payload connection uses the Supabase Session Pooler because direct Supabase database connections can require IPv6.
 
-## Dynamic Blog Routes
+## SEO Cluster Blog Routes
 
-The Next.js app now includes server-rendered Payload blog routes:
+The Next.js app includes indexable blog routes:
 
 - `/blog`
 - `/blog/[slug]`
+- `/blog/cluster/[clusterSlug]`
 
-The routes use `services/payloadBlog.ts` for Payload reads and reusable components under `components/blog/`. Existing static `.html` blog pages remain in place as launch fallbacks while the broader public site migration continues.
+The public routes use typed content from `content/blogClusters.ts` and `content/blogPosts.ts`, helpers in `lib/blog.ts`, and reusable components under `components/blog/`. Existing static `.html` blog pages remain in place as launch fallbacks while the broader public site migration continues.
 
-Public site navigation now points to `/blog`, and the legacy `blog.html` URL redirects to `/blog`, so newly published Payload posts are visible from the normal Blog entry point.
+The public blog is organized into the following SEO clusters:
+
+- Free Music Distribution
+- Spotify Royalties
+- Sell Music Online
+- Make Money as an Independent Artist
+- Fan-Powered Promotion
+- Music Royalties Explained
+- Music Distribution Platforms
+- Music Marketplace
+- Music Resale Rights
+- FanFactors Revolution
+
+Public site navigation points to `/blog`, and the legacy `blog.html` URL redirects to `/blog`.
+
+Published typed posts are indexable public content. `/blog`, `/blog/[slug]`, and `/blog/cluster/[clusterSlug]` emit canonical metadata, Open Graph and Twitter card metadata, and JSON-LD. `app/sitemap.ts` generates the production sitemap from the static public pages plus all published cluster and post routes, excluding legacy static blog HTML fallbacks to avoid duplicate canonical targets.
+
+Each cluster has a pillar post. Each post links back to its cluster and shows related posts from the same cluster. CTAs point visitors toward the FanFactors Alpha.
+
+## Payload Admin Notes
 
 Featured images are managed through Payload's `media` collection. Production uploads require the Vercel Blob storage adapter and `BLOB_READ_WRITE_TOKEN`; without that token, Payload can save post metadata but cannot persist uploaded image files on Vercel.
+
+Dynamic blog publishing uses Payload's native `_status` draft/published field in the admin UI and public read filters. The static JSON registry keeps its legacy `status` property so launch-content validation and seeding can map old posts into Payload without changing the static fallback format; Payload mirrors that hidden legacy column automatically for compatibility.
 
 The validation rules in `scripts/lib/blog-content.mjs` mirror the current Supabase constraints for:
 
@@ -77,7 +99,7 @@ The production admin should support:
 - featured image management
 - SEO fields
 - AI/search summary fields
-- simple post status filters
+- simple post status filters from Payload's native status
 
 ## Security Notes
 
@@ -102,3 +124,5 @@ Every published post should generate:
 ## Migration Notes
 
 The old static admin dashboard has been removed. Payload Admin is now the only admin direction.
+
+The public blog currently uses typed cluster content as its source of truth for reliability and SEO. Move Payload back into the public read path only after `npm run payload:verify-blog-publish`, `npm run payload:verify-blob`, `npm run build`, and production smoke tests pass against the deployed environment.

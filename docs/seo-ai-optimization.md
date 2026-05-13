@@ -11,14 +11,16 @@ The corporate site now includes baseline crawl and sharing signals:
 - `robots.txt`
 - `sitemap.xml`
 - `llms.txt`
+- indexable typed `/blog`, `/blog/[slug]`, and `/blog/cluster/[clusterSlug]` routes
+- typed Next.js sitemap generation for published blog posts and cluster pages
+- canonical, Open Graph, Twitter card, `Article`, and `BreadcrumbList` metadata for blog articles
+- `BreadcrumbList` and `CollectionPage` structured data for cluster pages
 
 ## Remaining SEO Work
 
 The site should still add:
 
-- keyword-focused editorial calendar
 - Search Console verification
-- stronger internal linking between content clusters
 - performance budget checks after future app migration
 - image dimension and compression audit
 - production analytics events for CTA and blog engagement
@@ -35,12 +37,17 @@ Write pages so AI systems can extract direct answers:
 
 ## Content Clusters
 
-Initial blog clusters:
+Current blog clusters:
 
-- direct-pay music
-- fan owners
-- artist-controlled pricing
-- legal music listening
-- FanScore and gamification
-- music marketplace economics
-- FanFactors mission and company story
+- Free Music Distribution: `free music distribution`
+- Spotify Royalties: `Spotify royalty calculator`
+- Sell Music Online: `sell music online`
+- Make Money as an Independent Artist: `how to make money as an independent artist`
+- Fan-Powered Promotion: `make money promoting music`
+- Music Royalties Explained: `music royalties explained`
+- Music Distribution Platforms: `best music distribution platforms`
+- Music Marketplace: `music marketplace`
+- Music Resale Rights: `music resale rights`
+- FanFactors Revolution: `FanFactors`
+
+Every cluster page links to its pillar post. Every post links back to its cluster and shows three related posts from the same cluster.

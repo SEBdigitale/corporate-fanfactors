@@ -137,6 +137,7 @@ function toFallbackPayloadPost(post: (typeof staticBlogPosts)[number]): PayloadB
     slug: post.slug,
     excerpt: post.excerpt,
     category: post.category,
+    _status: 'published',
     status: 'published',
     publishedAt: post.publishedAt,
     tags: post.tags.map((tag) => ({ tag })),

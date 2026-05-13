@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
+import { syncLegacyStatusWithDraftStatus } from './hooks/syncLegacyStatusWithDraftStatus'
 import { authenticated, publishedOnly } from './access'
 
 export const Pages: CollectionConfig = {
@@ -11,8 +12,14 @@ export const Pages: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'status', 'updatedAt'],
+    defaultColumns: ['title', 'slug', '_status', 'updatedAt'],
     useAsTitle: 'title',
+  },
+  hooks: {
+    beforeValidate: [syncLegacyStatusWithDraftStatus],
+  },
+  lockDocuments: {
+    duration: 30000,
   },
   fields: [
     {
@@ -28,9 +35,11 @@ export const Pages: CollectionConfig = {
       unique: true,
     },
     {
-      name: 'status',
-      type: 'select',
+      admin: {
+        hidden: true,
+      },
       defaultValue: 'draft',
+      name: 'status',
       options: [
         {
           label: 'Draft',
@@ -42,6 +51,7 @@ export const Pages: CollectionConfig = {
         },
       ],
       required: true,
+      type: 'select',
     },
     {
       name: 'seo',

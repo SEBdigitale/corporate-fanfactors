@@ -11,6 +11,8 @@ Payload Admin should use:
 - `BLOB_READ_WRITE_TOKEN`
 - `NEXT_PUBLIC_SITE_URL`
 
+`NEXT_PUBLIC_SITE_URL` may point to a localhost URL for local development. Production SEO canonicals and crawl files intentionally fall back to `https://corporate.fanfactors.com` when `VERCEL_ENV=production`.
+
 Retained Supabase-backed services should use:
 
 - `NEXT_PUBLIC_SUPABASE_URL`

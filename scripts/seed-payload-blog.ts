@@ -36,6 +36,7 @@ async function seedPayloadBlog() {
         id: existing.docs[0].id,
         collection: 'blog-posts',
         data,
+        draft: post.status === 'draft',
         overrideAccess: true,
       })
       payload.logger.info(`Updated blog post: ${post.slug}`)
@@ -45,6 +46,7 @@ async function seedPayloadBlog() {
     await payload.create({
       collection: 'blog-posts',
       data,
+      draft: post.status === 'draft',
       overrideAccess: true,
     })
     payload.logger.info(`Created blog post: ${post.slug}`)

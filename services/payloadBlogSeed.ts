@@ -37,6 +37,7 @@ export function buildPayloadBlogSeedPost(
   return {
     title: post.title,
     slug: post.slug,
+    _status: post.status,
     status: post.status,
     publishedAt: post.publishedAt,
     excerpt: post.excerpt,
