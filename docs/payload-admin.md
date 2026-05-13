@@ -122,3 +122,5 @@ npm run payload:seed:blog
 The seed command is idempotent by slug. It creates missing `blog-posts` records and updates existing records from `data/blog-posts.json` plus the matching static article HTML. The launch blog posts have been seeded into the Supabase-backed Payload database.
 
 Published Payload posts now render through the server-side `/blog` and `/blog/[slug]` routes. The existing static blog HTML files remain available while the rest of the public site is migrated.
+
+Payload's native draft status and the legacy `status` field can temporarily disagree because the launch migration kept the static publishing field while Payload drafts are enabled. Public blog reads treat either `status = published` or `_status = published` as published content, but editors should still use Payload's **Publish changes** action when they want a post to appear publicly.

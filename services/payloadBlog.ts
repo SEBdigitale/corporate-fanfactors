@@ -2,6 +2,7 @@ import config from '@payload-config'
 import { getPayload } from 'payload'
 
 import staticBlogPosts from '@/data/blog-posts.json'
+import { getPublishedContentWhere } from '@/lib/payload-publishing'
 import type { PayloadBlogPost } from '@/types/payload-content'
 
 const BLOG_LIMIT = 24
@@ -16,11 +17,7 @@ export async function getPublishedBlogPosts(): Promise<PayloadBlogPost[]> {
       limit: BLOG_LIMIT,
       overrideAccess: true,
       sort: '-publishedAt',
-      where: {
-        status: {
-          equals: 'published',
-        },
-      },
+      where: getPublishedContentWhere(),
     })
 
     return result.docs
@@ -32,6 +29,8 @@ export async function getPublishedBlogPosts(): Promise<PayloadBlogPost[]> {
 }
 
 export async function getPublishedBlogPostBySlug(slug: string): Promise<PayloadBlogPost | null> {
+  const decodedSlug = decodeSlugParam(slug)
+
   try {
     const payload = await getPayloadClient()
     const result = await payload.find({
@@ -43,14 +42,10 @@ export async function getPublishedBlogPostBySlug(slug: string): Promise<PayloadB
         and: [
           {
             slug: {
-              equals: slug,
+              equals: decodedSlug,
             },
           },
-          {
-            status: {
-              equals: 'published',
-            },
-          },
+          getPublishedContentWhere(),
         ],
       },
     })
@@ -80,6 +75,14 @@ function normalizePublicPath(path: string) {
   }
 
   return path.startsWith('/') ? path : `/${path}`
+}
+
+function decodeSlugParam(slug: string) {
+  try {
+    return decodeURIComponent(slug)
+  } catch {
+    return slug
+  }
 }
 
 function toPersistentMediaUrl(path?: null | string) {
