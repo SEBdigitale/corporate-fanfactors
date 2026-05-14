@@ -31,7 +31,7 @@ export function BlogClusterNav({ clusters, posts }: BlogClusterNavProps) {
 
           return (
             <article key={cluster.slug} className={styles.clusterCard}>
-              <img alt={`${cluster.name} topic`} src={cluster.featuredImage} />
+              <img alt={`${cluster.name} topic`} decoding="async" loading="lazy" src={cluster.featuredImage} />
               <div>
                 <span>{cluster.primaryKeyword}</span>
                 <h3>

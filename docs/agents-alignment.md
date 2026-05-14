@@ -21,6 +21,8 @@
 - `/blog`, `/blog/[slug]` and `/blog/cluster/[clusterSlug]` now render through reusable React components from typed SEO clusters plus published Payload posts.
 - Payload Blog Posts expose a real slug field and a controlled Blog Cluster dropdown backed by the existing `category` column to avoid a risky production schema migration.
 - Public blog routes now emit indexable metadata, canonical URLs, social metadata and JSON-LD while falling back to typed content if Payload runtime reads fail.
+- The public blog homepage now uses reusable FanFactors-styled hero, slider, card and cluster components with published date and read-time metadata on post cards.
+- Payload Admin uses the FanFactors green `F` mark for the login logo and admin navigation icon.
 - `app/sitemap.ts` and `app/robots.ts` provide typed crawl files for the dynamic app routes.
 - Payload blog and page publishing now use Payload's native `_status` workflow in the admin UI and public reads, with hidden legacy status synchronization and a publish smoke-test script for regression checks.
 - Shared static serving logic lives in `lib/static-site.ts`.

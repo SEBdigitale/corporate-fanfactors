@@ -13,10 +13,11 @@ export function BlogCard({ post }: BlogCardProps) {
 
   return (
     <article className={styles.card}>
-      <img alt={post.title} src={post.featuredImage} />
+      <img alt={post.title} decoding="async" loading="lazy" src={post.featuredImage} />
       <div className={styles.cardBody}>
         <div className={styles.meta}>
           {cluster ? <Link href={getBlogClusterUrl(cluster)}>{cluster.name}</Link> : null}
+          <span>{formatBlogDate(post.publishedAt)}</span>
           <span>{post.readingTime}</span>
         </div>
         <h2>
@@ -33,4 +34,12 @@ export function BlogCard({ post }: BlogCardProps) {
       </div>
     </article>
   )
+}
+
+function formatBlogDate(date: string) {
+  return new Intl.DateTimeFormat('en', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }).format(new Date(`${date}T00:00:00`))
 }

@@ -19,6 +19,10 @@ const blobToken = process.env.BLOB_READ_WRITE_TOKEN
 export default buildConfig({
   admin: {
     components: {
+      graphics: {
+        Icon: '@/components/payload/FanFactorsAdminIcon#FanFactorsAdminIcon',
+        Logo: '@/components/payload/FanFactorsAdminLogo#FanFactorsAdminLogo',
+      },
       views: {},
     },
     user: Users.slug,

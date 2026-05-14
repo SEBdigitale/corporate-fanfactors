@@ -14,6 +14,7 @@
 - Shared content type aliases live in `types/payload-content.ts`.
 - Payload media uploads use Vercel Blob storage in production.
 - Public static pages are preserved through `app/[[...path]]/route.ts` and `lib/static-site.ts`.
+- Payload Admin uses custom FanFactors graphics for the login logo and admin navigation icon through `admin.components.graphics` in `payload.config.ts`.
 
 ## Collections
 

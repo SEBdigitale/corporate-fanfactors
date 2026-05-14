@@ -71,6 +71,8 @@ Published Payload posts and typed fallback posts are indexable public content. `
 
 Each cluster has a pillar post. Each post links back to its cluster and shows related posts from the same cluster. CTAs point visitors toward the FanFactors Alpha.
 
+The `/blog` homepage uses the same dark FanFactors visual direction as the static corporate site: green brand accent, compact premium cards, the real FanFactors wordmark, published-date/read-time metadata on post cards, and an animated hero image rotation from checked-in public assets under `assets/images/blog-hero/`.
+
 ## Payload Admin Notes
 
 Featured images are managed through Payload's `media` collection. Production uploads require the Vercel Blob storage adapter and `BLOB_READ_WRITE_TOKEN`; without that token, Payload can save post metadata but cannot persist uploaded image files on Vercel.
