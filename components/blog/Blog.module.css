@@ -15,8 +15,15 @@
 
 .headerInner,
 .main {
-  width: min(1280px, calc(100% - 40px));
   margin: 0 auto;
+}
+
+.headerInner {
+  width: min(1640px, calc(100% - 68px));
+}
+
+.main {
+  width: min(1520px, calc(100% - 68px));
 }
 
 .headerInner {
@@ -731,7 +738,7 @@
 @media (max-width: 640px) {
   .headerInner,
   .main {
-    width: min(100% - 28px, 1280px);
+    width: min(100% - 28px, 1520px);
   }
 
   .hero {

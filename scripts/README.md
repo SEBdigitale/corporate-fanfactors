@@ -9,6 +9,8 @@ This folder contains Node.js scripts used to keep the public static pages and mi
 - `npm run supabase:validate`: validates the corporate blog Supabase migration contract.
 - `npm run security:validate`: validates the environment template and scans tracked source files for obvious committed secrets.
 - `npm run payload:env:check`: checks whether the local or shell environment is ready to boot Payload Admin.
+- `npm run payload:repair-blog`: normalizes existing Payload blog records after editorial schema or validation updates.
+- `npm run payload:seed:blog-clusters`: creates missing typed SEO cluster posts in Payload without overwriting existing editor changes.
 - `npm run validate`: runs the complete validation suite used by GitHub Actions.
 
 ## Structure

@@ -13,6 +13,8 @@
     "payload:env:check": "node scripts/check-payload-env.mjs",
     "payload:importmap": "BLOB_READ_WRITE_TOKEN=vercel_blob_rw_buildplaceholder_placeholder payload generate:importmap",
     "payload:seed:blog": "payload run scripts/seed-payload-blog.ts",
+    "payload:seed:blog-clusters": "payload run scripts/seed-payload-blog-clusters.ts",
+    "payload:repair-blog": "payload run scripts/repair-payload-blog-posts.ts",
     "payload:types": "payload generate:types",
     "payload:verify-blog-publish": "payload run scripts/verify-payload-blog-publish.ts",
     "payload:verify-blob": "payload run scripts/verify-payload-blob-upload.ts",

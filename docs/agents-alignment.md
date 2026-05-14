@@ -3,7 +3,7 @@
 ## Current Percentages
 
 - Static public-site compliance: 100%
-- Next.js, React, TypeScript and Payload target standard: 91%
+- Next.js, React, TypeScript and Payload target standard: 91.5%
 
 ## What Is Already Aligned
 
@@ -25,6 +25,7 @@
 - Payload Admin uses the FanFactors green `F` mark for the login logo and admin navigation icon.
 - `app/sitemap.ts` and `app/robots.ts` provide typed crawl files for the dynamic app routes.
 - Payload blog and page publishing now use Payload's native `_status` workflow in the admin UI and public reads, with hidden legacy status synchronization and a publish smoke-test script for regression checks.
+- Payload Blog Posts now sanitize editor input before validation, include a repair workflow for existing records, and can seed every typed SEO cluster post into Payload without overwriting manual edits.
 - Shared static serving logic lives in `lib/static-site.ts`.
 - Documentation covers Payload admin, security, quality gates and deployment notes.
 - Supabase service-role keys remain server-only by policy and validation.
@@ -49,6 +50,7 @@
 - 89% when Payload content publishing uses the native draft/publish workflow without a visible duplicate status field. Complete.
 - 90% when the public blog has typed content modules, reusable React blog components, cluster routes and typed sitemap entries. Complete.
 - 91% when Payload Blog Posts can publish into SEO clusters and public routes merge published Payload posts with typed fallback content. Complete.
+- 91.5% when all typed SEO cluster posts can be seeded into Payload and existing Payload blog records can be repaired without replacing editor-authored content. Complete.
 - 92% when shared non-blog public layout/header/footer are React components.
 - 95% when page metadata and sitemap generation are typed Next modules.
 - 100% when production deploy, admin auth, migrations, server rendering, docs and validation are all aligned.

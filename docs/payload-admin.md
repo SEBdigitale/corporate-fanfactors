@@ -84,6 +84,8 @@ npm run payload:verify-blob
 
 The Blob verification script creates a tiny temporary media record, verifies the production media URL can serve it, and deletes the temporary record afterward. Run it after adding or rotating `BLOB_READ_WRITE_TOKEN`, `DATABASE_URL`, or `PAYLOAD_SECRET` in Vercel.
 
+If this command reports that `BLOB_READ_WRITE_TOKEN` is missing or invalid, Payload can still save text fields but media uploads will fail until the Vercel Blob store is connected and the production token is set.
+
 Check whether blog edits can move through Payload's draft and publish workflow:
 
 ```bash
@@ -91,6 +93,14 @@ npm run payload:verify-blog-publish
 ```
 
 The blog publish verification script creates a temporary post, saves a draft change, publishes the change, verifies the published query can read it, and deletes the temporary post afterward.
+
+Repair existing blog records after changing validation or editor field rules:
+
+```bash
+npm run payload:repair-blog
+```
+
+The repair command normalizes legacy cluster/category values, removes empty tag rows, fills missing SEO fallbacks, trims overlong summary fields, and adds missing publish dates without replacing article body content.
 
 Blog Posts include:
 
@@ -135,6 +145,14 @@ npm run payload:seed:blog
 ```
 
 The seed command is idempotent by slug. It creates missing `blog-posts` records and updates existing records from `data/blog-posts.json` plus the matching static article HTML. The launch blog posts have been seeded into the Supabase-backed Payload database.
+
+Seed the typed SEO cluster article set into Payload so every cluster post is editable in the admin UI:
+
+```bash
+npm run payload:seed:blog-clusters
+```
+
+The cluster seed command creates missing posts from `content/blogPosts.ts` only. It skips existing slugs so manual edits in Payload are preserved.
 
 The public SEO blog now merges published Payload posts with typed Next.js fallback content under `content/`. This lets new published Payload posts appear on `/blog`, `/blog/[slug]`, and their selected `/blog/cluster/[clusterSlug]` page while the typed fallback keeps public pages stable if the database is temporarily unavailable.
 

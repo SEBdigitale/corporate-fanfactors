@@ -38,7 +38,7 @@ Posts should include:
 
 The registry is intentionally small and only includes published posts. It gives the static site a single content contract for validation while Payload is introduced.
 
-`services/payloadBlogSeed.ts` maps registry entries and matching static article HTML into Payload `blog-posts` records. `scripts/seed-payload-blog.ts` performs idempotent create/update operations by slug.
+`services/payloadBlogSeed.ts` maps registry entries, typed SEO cluster posts, and matching static article HTML into Payload `blog-posts` records. `scripts/seed-payload-blog.ts` performs idempotent create/update operations for the static launch posts by slug, while `scripts/seed-payload-blog-clusters.ts` creates missing typed SEO cluster posts without overwriting editor changes.
 
 The local Payload connection uses the Supabase Session Pooler because direct Supabase database connections can require IPv6.
 
@@ -80,6 +80,8 @@ Featured images are managed through Payload's `media` collection. Production upl
 Dynamic blog publishing uses Payload's native `_status` draft/published field in the admin UI and public read filters. The static JSON registry keeps its legacy `status` property so launch-content validation and seeding can map old posts into Payload without changing the static fallback format; Payload mirrors that hidden legacy column automatically for compatibility.
 
 Blog Posts use the existing `category` database column as the Blog Cluster selector. The dropdown values are the cluster slugs from `content/blogClusters.ts`, which avoids adding a new database column just to support cluster publishing. The production column must remain plain text/varchar rather than a database enum so older categories can be normalized safely. Legacy free-text categories are normalized into the closest current cluster during validation.
+
+Payload Blog Posts also sanitize editor input before validation. Empty tag rows are removed, SEO fields get safe fallbacks, longer editorial titles and summaries are allowed, and published posts receive a `publishedAt` value if one is missing. Run `npm run payload:repair-blog` after schema or validation changes to normalize existing database records without replacing article body content.
 
 The validation rules in `scripts/lib/blog-content.mjs` mirror the current Supabase constraints for:
 

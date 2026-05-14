@@ -1,5 +1,6 @@
 import type { RequiredDataFromCollectionSlug } from 'payload'
 
+import type { BlogPost } from '@/content/blogPosts'
 import { normalizeBlogClusterSlug } from '@/lib/blog-clusters'
 
 export type StaticBlogRegistryEntry = {
@@ -55,6 +56,41 @@ export function buildPayloadBlogSeedPost(
       staticFile: post.file,
       featuredImagePath: post.featuredImage,
       socialImagePath: post.socialImage,
+    },
+  }
+}
+
+export function buildPayloadClusterBlogSeedPost(post: BlogPost): PayloadBlogSeedPost {
+  const tags = [...new Set([post.primaryKeyword, ...post.secondaryKeywords])]
+    .filter(Boolean)
+    .slice(0, 6)
+    .map((tag) => ({ tag }))
+
+  return {
+    title: post.title,
+    slug: post.slug,
+    _status: post.status,
+    status: post.status,
+    publishedAt: toIsoDate(post.publishedAt),
+    excerpt: post.excerpt,
+    body: toLexicalRichText([
+      {
+        text: post.excerpt,
+        type: 'paragraph',
+      },
+      ...post.body.map((text): ArticleBlock => ({ text, type: 'paragraph' })),
+    ]),
+    category: normalizeBlogClusterSlug(post.clusterSlug, [post.title, post.slug, tags.map((item) => item.tag).join(' ')].join(' ')),
+    tags,
+    seo: {
+      title: post.metaTitle,
+      description: post.metaDescription,
+      aiSummary: post.searchIntent,
+    },
+    source: {
+      staticFile: 'content/blogPosts.ts',
+      featuredImagePath: post.featuredImage,
+      socialImagePath: post.featuredImage,
     },
   }
 }
@@ -124,4 +160,12 @@ function decodeHtml(value: string) {
     .replace(/&rsquo;/g, "'")
     .replace(/&mdash;/g, '-')
     .replace(/\s+/g, ' ')
+}
+
+function toIsoDate(value: string) {
+  if (value.includes('T')) {
+    return value
+  }
+
+  return `${value}T00:00:00.000Z`
 }

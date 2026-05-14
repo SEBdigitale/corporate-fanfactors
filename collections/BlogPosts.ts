@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { normalizeBlogClusterCategory } from './hooks/normalizeBlogClusterCategory'
 import { normalizeBlogPostSlug } from './hooks/normalizeBlogPostSlug'
+import { sanitizeBlogPostFields } from './hooks/sanitizeBlogPostFields'
 import { syncLegacyStatusWithDraftStatus } from './hooks/syncLegacyStatusWithDraftStatus'
 import { authenticated, publishedOnly } from './access'
 
@@ -18,7 +19,7 @@ export const BlogPosts: CollectionConfig = {
     useAsTitle: 'title',
   },
   hooks: {
-    beforeValidate: [normalizeBlogPostSlug, normalizeBlogClusterCategory, syncLegacyStatusWithDraftStatus],
+    beforeValidate: [normalizeBlogPostSlug, normalizeBlogClusterCategory, syncLegacyStatusWithDraftStatus, sanitizeBlogPostFields],
   },
   lockDocuments: {
     duration: 30000,
@@ -27,7 +28,7 @@ export const BlogPosts: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
-      maxLength: 80,
+      maxLength: 160,
       required: true,
     },
     {
@@ -72,7 +73,7 @@ export const BlogPosts: CollectionConfig = {
     {
       name: 'excerpt',
       type: 'textarea',
-      maxLength: 220,
+      maxLength: 320,
       required: true,
     },
     {
@@ -138,7 +139,7 @@ export const BlogPosts: CollectionConfig = {
         {
           name: 'title',
           type: 'text',
-          maxLength: 70,
+          maxLength: 160,
           required: true,
         },
         {
@@ -150,7 +151,7 @@ export const BlogPosts: CollectionConfig = {
         {
           name: 'aiSummary',
           type: 'textarea',
-          maxLength: 300,
+          maxLength: 500,
         },
       ],
     },
