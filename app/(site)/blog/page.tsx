@@ -110,9 +110,9 @@ export default async function BlogPage() {
             <span className={styles.eyebrow}>Start here</span>
             <h2 id="pillar-post-heading">Main pillar article</h2>
           </div>
-          <BlogGrid ariaLabel="Featured pillar article">
+          <div className={styles.pillarPreview} aria-label="Featured pillar article">
             <BlogCard post={featuredPost} />
-          </BlogGrid>
+          </div>
         </section>
       ) : null}
       <BlogCTA ctaType="artist-alpha" />
