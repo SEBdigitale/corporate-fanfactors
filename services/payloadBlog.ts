@@ -2,10 +2,11 @@ import config from '@payload-config'
 import { getPayload } from 'payload'
 
 import staticBlogPosts from '@/data/blog-posts.json'
+import { normalizeBlogClusterSlug } from '@/lib/blog-clusters'
 import { getPublishedContentWhere } from '@/lib/payload-publishing'
 import type { PayloadBlogPost } from '@/types/payload-content'
 
-const BLOG_LIMIT = 24
+const BLOG_LIMIT = 100
 let payloadClientPromise: ReturnType<typeof getPayload> | null = null
 
 export async function getPublishedBlogPosts(): Promise<PayloadBlogPost[]> {
@@ -136,7 +137,7 @@ function toFallbackPayloadPost(post: (typeof staticBlogPosts)[number]): PayloadB
     title: post.title,
     slug: post.slug,
     excerpt: post.excerpt,
-    category: post.category,
+    category: normalizeBlogClusterSlug(post.category, [post.title, post.slug, post.tags.join(' ')].join(' ')),
     _status: 'published',
     status: 'published',
     publishedAt: post.publishedAt,

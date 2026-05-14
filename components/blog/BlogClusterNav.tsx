@@ -1,14 +1,22 @@
 import Link from 'next/link'
 
-import { getBlogClusterUrl, getPillarPostForCluster, getBlogPostUrl, type BlogCluster } from '@/lib/blog'
+import {
+  getBlogClusterUrl,
+  getBlogPostUrl,
+  getPillarPostForCluster,
+  getPillarPostForClusterFromPosts,
+  type BlogCluster,
+  type BlogPost,
+} from '@/lib/blog'
 
 import styles from './Blog.module.css'
 
 type BlogClusterNavProps = {
   clusters: BlogCluster[]
+  posts?: BlogPost[]
 }
 
-export function BlogClusterNav({ clusters }: BlogClusterNavProps) {
+export function BlogClusterNav({ clusters, posts }: BlogClusterNavProps) {
   return (
     <section className={styles.section} aria-labelledby="blog-clusters-heading">
       <div className={styles.sectionHeader}>
@@ -17,7 +25,9 @@ export function BlogClusterNav({ clusters }: BlogClusterNavProps) {
       </div>
       <div className={styles.clusterGrid}>
         {clusters.map((cluster) => {
-          const pillar = getPillarPostForCluster(cluster.slug)
+          const pillar = posts
+            ? getPillarPostForClusterFromPosts(cluster.slug, posts)
+            : getPillarPostForCluster(cluster.slug)
 
           return (
             <article key={cluster.slug} className={styles.clusterCard}>

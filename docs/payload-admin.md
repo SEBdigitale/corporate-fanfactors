@@ -19,7 +19,7 @@
 
 - `users`: Payload-authenticated admins and editors.
 - `media`: uploaded images with reusable card and social sizes.
-- `blog-posts`: draft/published articles with SEO and AI summary fields.
+- `blog-posts`: draft/published articles with SEO fields, a URL slug, and a Blog Cluster selector.
 - `pages`: draft/published page records for the future dynamic site.
 
 ## Environment
@@ -91,6 +91,12 @@ npm run payload:verify-blog-publish
 
 The blog publish verification script creates a temporary post, saves a draft change, publishes the change, verifies the published query can read it, and deletes the temporary post afterward.
 
+Blog Posts include:
+
+- `Slug`: the public `/blog/[slug]` URL segment. Spaces and punctuation are normalized on save.
+- `Blog Cluster`: a dropdown of the current SEO clusters. This is stored in the existing `category` column as the cluster slug, so it does not require a new production database column.
+- `Featured Image`: uploaded through the `media` collection and rendered on the public blog when the post is published.
+
 ## Login Flow
 
 Payload creates the first admin user from `/admin` after the database and secret are configured.
@@ -129,6 +135,8 @@ npm run payload:seed:blog
 
 The seed command is idempotent by slug. It creates missing `blog-posts` records and updates existing records from `data/blog-posts.json` plus the matching static article HTML. The launch blog posts have been seeded into the Supabase-backed Payload database.
 
-The public SEO blog currently renders from typed Next.js content modules under `content/` so public blog pages stay stable while production Payload publishing and media writes are hardened. The existing Payload collections remain the admin direction, and the existing static blog HTML files remain available while the rest of the public site is migrated.
+The public SEO blog now merges published Payload posts with typed Next.js fallback content under `content/`. This lets new published Payload posts appear on `/blog`, `/blog/[slug]`, and their selected `/blog/cluster/[clusterSlug]` page while the typed fallback keeps public pages stable if the database is temporarily unavailable.
+
+Keep the `blog_posts.category` database column as text/varchar. Payload uses a custom admin dropdown for cluster selection, not a database enum, so legacy category values can be normalized without breaking saves.
 
 Payload's native `_status` field is the only visible editorial publishing status for dynamic content. The legacy `status` column remains hidden for compatibility with the seeded launch data and is synchronized automatically before validation so it cannot drift away from Payload's draft workflow.

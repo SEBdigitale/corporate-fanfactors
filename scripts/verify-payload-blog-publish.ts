@@ -105,7 +105,7 @@ function buildPostData(label: string, status: NonNullable<BlogPostData['_status'
     publishedAt: new Date().toISOString(),
     excerpt: `Smoke test post used to verify Payload can save drafts and publish changes for the corporate blog.`,
     body: toLexicalRichText(`This temporary post verifies the Payload blog publish flow for ${label}.`),
-    category: 'QA',
+    category: 'fanfactors-revolution',
     tags: [
       {
         tag: 'payload',

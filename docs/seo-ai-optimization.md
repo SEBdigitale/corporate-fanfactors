@@ -15,6 +15,7 @@ The corporate site now includes baseline crawl and sharing signals:
 - typed Next.js sitemap generation for published blog posts and cluster pages
 - canonical, Open Graph, Twitter card, `Article`, and `BreadcrumbList` metadata for blog articles
 - `BreadcrumbList` and `CollectionPage` structured data for cluster pages
+- Payload Blog Posts can select a Blog Cluster, and published Payload posts are merged into the public SEO routes with typed fallback content.
 
 ## Remaining SEO Work
 

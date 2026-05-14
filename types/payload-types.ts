@@ -192,7 +192,7 @@ export interface BlogPost {
   id: number;
   title: string;
   /**
-   * Lowercase URL slug, for example fan-owners-direct-pay.
+   * Public URL slug, for example fan-owners-direct-pay. Punctuation and spaces are normalized on save.
    */
   slug: string;
   status: 'draft' | 'published';
@@ -214,6 +214,9 @@ export interface BlogPost {
     [k: string]: unknown;
   };
   featuredImage?: (number | null) | Media;
+  /**
+   * Choose the SEO cluster for this article. This controls /blog/cluster/[clusterSlug] and related posts.
+   */
   category: string;
   /**
    * Static launch source metadata retained for the Payload migration.

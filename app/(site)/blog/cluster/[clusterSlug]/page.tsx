@@ -13,8 +13,9 @@ import {
   getAllBlogClusters,
   getBlogClusterBySlug,
   getBlogClusterUrl,
-  getPillarPostForCluster,
-  getPostsByCluster,
+  getPillarPostForClusterFromPosts,
+  getPostsByClusterFromPosts,
+  getPublishedBlogPostsForRoutes,
 } from '@/lib/blog'
 import { getAbsoluteUrl, getCanonicalUrl, SITE_ORIGIN } from '@/lib/site-url'
 
@@ -23,6 +24,8 @@ type PageProps = {
     clusterSlug: string
   }>
 }
+
+export const dynamic = 'force-dynamic'
 
 export function generateStaticParams() {
   return getAllBlogClusters().map((cluster) => ({
@@ -83,8 +86,9 @@ export default async function BlogClusterPage({ params }: PageProps) {
     notFound()
   }
 
-  const posts = getPostsByCluster(cluster.slug)
-  const pillarPost = getPillarPostForCluster(cluster.slug)
+  const allPosts = await getPublishedBlogPostsForRoutes()
+  const posts = getPostsByClusterFromPosts(allPosts, cluster.slug)
+  const pillarPost = getPillarPostForClusterFromPosts(cluster.slug, allPosts)
   const clusterPath = getBlogClusterUrl(cluster)
   const breadcrumbs = [
     { href: '/', label: 'Home' },

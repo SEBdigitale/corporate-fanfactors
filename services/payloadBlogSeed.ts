@@ -1,5 +1,7 @@
 import type { RequiredDataFromCollectionSlug } from 'payload'
 
+import { normalizeBlogClusterSlug } from '@/lib/blog-clusters'
+
 export type StaticBlogRegistryEntry = {
   category: string
   excerpt: string
@@ -42,7 +44,7 @@ export function buildPayloadBlogSeedPost(
     publishedAt: post.publishedAt,
     excerpt: post.excerpt,
     body: toLexicalRichText(articleBlocks.length > 0 ? articleBlocks : fallbackBlocks),
-    category: post.category,
+    category: normalizeBlogClusterSlug(post.category, [post.title, post.slug, post.tags.join(' ')].join(' ')),
     tags: post.tags.map((tag) => ({ tag })),
     seo: {
       title: post.seoTitle,

@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
+import { normalizeBlogClusterCategory } from './hooks/normalizeBlogClusterCategory'
+import { normalizeBlogPostSlug } from './hooks/normalizeBlogPostSlug'
 import { syncLegacyStatusWithDraftStatus } from './hooks/syncLegacyStatusWithDraftStatus'
 import { authenticated, publishedOnly } from './access'
 
@@ -12,11 +14,11 @@ export const BlogPosts: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    defaultColumns: ['title', '_status', 'publishedAt', 'updatedAt'],
+    defaultColumns: ['title', 'category', '_status', 'publishedAt', 'updatedAt'],
     useAsTitle: 'title',
   },
   hooks: {
-    beforeValidate: [syncLegacyStatusWithDraftStatus],
+    beforeValidate: [normalizeBlogPostSlug, normalizeBlogClusterCategory, syncLegacyStatusWithDraftStatus],
   },
   lockDocuments: {
     duration: 30000,
@@ -32,7 +34,8 @@ export const BlogPosts: CollectionConfig = {
       name: 'slug',
       type: 'text',
       admin: {
-        description: 'Lowercase URL slug, for example fan-owners-direct-pay.',
+        description:
+          'Public URL slug, for example fan-owners-direct-pay. Punctuation and spaces are normalized on save.',
       },
       index: true,
       required: true,
@@ -84,7 +87,16 @@ export const BlogPosts: CollectionConfig = {
     },
     {
       name: 'category',
+      label: 'Blog Cluster',
       type: 'text',
+      admin: {
+        components: {
+          Field: '@/components/payload/BlogClusterField#BlogClusterField',
+        },
+        description:
+          'Choose the SEO cluster for this article. This controls /blog/cluster/[clusterSlug] and related posts.',
+      },
+      defaultValue: 'fanfactors-revolution',
       required: true,
     },
     {

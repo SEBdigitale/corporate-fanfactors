@@ -9,10 +9,10 @@ import { BlogShell } from '@/components/blog/BlogShell'
 import { JsonLd } from '@/components/JsonLd'
 import {
   getAllBlogClusters,
-  getAllPublishedBlogPosts,
   getBlogPostUrl,
-  getFeaturedPillarPost,
-  getLatestPosts,
+  getFeaturedPillarPostFromPosts,
+  getLatestPostsFromPosts,
+  getPublishedBlogPostsForRoutes,
 } from '@/lib/blog'
 import { getCanonicalUrl, SITE_ORIGIN } from '@/lib/site-url'
 
@@ -22,6 +22,8 @@ const blogDescription =
   'FanFactors helps artists and fans understand the new music economy: distribution, royalties, direct sales, fan-powered promotion, legal resale rights, and the social marketplace built around “We’re taking music back™.”'
 const blogPath = '/blog'
 const blogUrl = getCanonicalUrl(blogPath)
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_ORIGIN),
@@ -52,9 +54,9 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   const clusters = getAllBlogClusters()
-  const posts = getAllPublishedBlogPosts()
-  const latestPosts = getLatestPosts(6)
-  const featuredPost = getFeaturedPillarPost()
+  const posts = await getPublishedBlogPostsForRoutes()
+  const latestPosts = getLatestPostsFromPosts(posts, 6)
+  const featuredPost = getFeaturedPillarPostFromPosts(posts)
 
   return (
     <BlogShell>
@@ -86,7 +88,7 @@ export default async function BlogPage() {
         featuredPost={featuredPost}
         postCount={posts.length}
       />
-      <BlogClusterNav clusters={clusters} />
+      <BlogClusterNav clusters={clusters} posts={posts} />
       {latestPosts.length > 0 ? (
         <section className={styles.section} aria-labelledby="latest-posts-heading">
           <div className={styles.sectionHeader}>

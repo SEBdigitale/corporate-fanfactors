@@ -3,14 +3,15 @@ import type { MetadataRoute } from 'next'
 import sitePages from '@/data/site-pages.json'
 import {
   getAllBlogClusters,
-  getAllPublishedBlogPosts,
   getBlogClusterUrl,
   getBlogPostUrl,
-  getMostRecentBlogUpdate,
+  getMostRecentBlogUpdateFromPosts,
+  getPublishedBlogPostsForRoutes,
 } from '@/lib/blog'
 import { getCanonicalUrl } from '@/lib/site-url'
 
 export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 type StaticPage = {
   file: string
@@ -21,9 +22,10 @@ type StaticPage = {
 
 const STATIC_LAST_MODIFIED = '2026-05-10'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const clusters = getAllBlogClusters()
-  const posts = getAllPublishedBlogPosts()
+  const posts = await getPublishedBlogPostsForRoutes()
+  const mostRecentBlogUpdate = getMostRecentBlogUpdateFromPosts(posts)
   const staticEntries = (sitePages as StaticPage[])
     .filter((page) => page.index !== false && !isLegacyBlogPage(page.file))
     .map((page) => ({
@@ -37,13 +39,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticEntries,
     {
       url: getCanonicalUrl('/blog'),
-      lastModified: getMostRecentBlogUpdate() ?? STATIC_LAST_MODIFIED,
+      lastModified: mostRecentBlogUpdate ?? STATIC_LAST_MODIFIED,
       changeFrequency: 'daily',
       priority: 0.9,
     },
     ...clusters.map((cluster) => ({
       url: getCanonicalUrl(getBlogClusterUrl(cluster)),
-      lastModified: getMostRecentBlogUpdate() ?? STATIC_LAST_MODIFIED,
+      lastModified: mostRecentBlogUpdate ?? STATIC_LAST_MODIFIED,
       changeFrequency: 'weekly' as const,
       priority: 0.85,
     })),

@@ -11,10 +11,11 @@ import { RelatedPosts } from '@/components/blog/RelatedPosts'
 import {
   getAllPublishedBlogPosts,
   getBlogClusterUrl,
-  getBlogPostBySlug,
   getBlogPostUrl,
   getClusterForPost,
-  getRelatedPosts,
+  getPublishedBlogPostBySlugForRoutes,
+  getPublishedBlogPostsForRoutes,
+  getRelatedPostsFromPosts,
 } from '@/lib/blog'
 import { getAbsoluteUrl, getCanonicalUrl, SITE_ORIGIN } from '@/lib/site-url'
 
@@ -24,6 +25,8 @@ type PageProps = {
   }>
 }
 
+export const dynamic = 'force-dynamic'
+
 export function generateStaticParams() {
   return getAllPublishedBlogPosts().map((post) => ({
     slug: post.slug,
@@ -32,7 +35,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const post = getBlogPostBySlug(slug)
+  const post = await getPublishedBlogPostBySlugForRoutes(slug)
 
   if (!post) {
     return {
@@ -78,14 +81,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params
-  const post = getBlogPostBySlug(slug)
+  const decodedSlug = decodeSlugParam(slug)
+  const posts = await getPublishedBlogPostsForRoutes()
+  const post = posts.find((candidate) => candidate.slug === decodedSlug)
 
   if (!post) {
     notFound()
   }
 
   const cluster = getClusterForPost(post)
-  const relatedPosts = getRelatedPosts(post, 3)
+  const relatedPosts = getRelatedPostsFromPosts(post, posts, 3)
   const imageUrl = getAbsoluteUrl(post.featuredImage)
   const postPath = getBlogPostUrl(post)
   const canonicalUrl = getCanonicalUrl(postPath)
@@ -159,6 +164,14 @@ export default async function BlogPostPage({ params }: PageProps) {
       <BlogCTA ctaType={post.ctaType} />
     </BlogShell>
   )
+}
+
+function decodeSlugParam(slug: string) {
+  try {
+    return decodeURIComponent(slug)
+  } catch {
+    return slug
+  }
 }
 
 function formatDate(date: string) {
