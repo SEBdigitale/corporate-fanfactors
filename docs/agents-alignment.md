@@ -3,7 +3,7 @@
 ## Current Percentages
 
 - Static public-site compliance: 100%
-- Next.js, React, TypeScript and Payload target standard: 91.5%
+- Next.js, React, TypeScript and Payload target standard: 92.5%
 
 ## What Is Already Aligned
 
@@ -24,7 +24,7 @@
 - The public blog homepage now uses reusable FanFactors-styled hero, slider, card and cluster components with published date and read-time metadata on post cards.
 - Payload Admin uses the FanFactors green `F` mark for the login logo and admin navigation icon.
 - `app/sitemap.ts` and `app/robots.ts` provide typed crawl files for the dynamic app routes.
-- Payload blog and page publishing now use Payload's native `_status` workflow in the admin UI and public reads, with hidden legacy status synchronization and a publish smoke-test script for regression checks.
+- Payload Pages continue to use Payload's native `_status` workflow, while Blog Posts use a visible `Publishing Status` field and normal authenticated saves to avoid fragile draft-version publish errors.
 - Payload Blog Posts now sanitize editor input before validation, include a repair workflow for existing records, and can seed every typed SEO cluster post into Payload without overwriting manual edits.
 - Shared static serving logic lives in `lib/static-site.ts`.
 - Documentation covers Payload admin, security, quality gates and deployment notes.
@@ -47,11 +47,12 @@
 - 80% when blog content is seeded into a configured Payload database. Complete.
 - 85% when public blog routes render server-side from Payload. Complete.
 - 88% when Payload-backed blog SEO metadata and dynamic crawl files are typed Next modules. Complete.
-- 89% when Payload content publishing uses the native draft/publish workflow without a visible duplicate status field. Complete.
+- 89% when Payload content publishing avoids duplicate drift between visible editor state and public read filters. Complete.
 - 90% when the public blog has typed content modules, reusable React blog components, cluster routes and typed sitemap entries. Complete.
 - 91% when Payload Blog Posts can publish into SEO clusters and public routes merge published Payload posts with typed fallback content. Complete.
 - 91.5% when all typed SEO cluster posts can be seeded into Payload and existing Payload blog records can be repaired without replacing editor-authored content. Complete.
 - 92% when shared non-blog public layout/header/footer are React components.
+- 92.5% when Blog Posts publish through a normal authenticated status save path with repair and smoke-test coverage. Complete.
 - 95% when page metadata and sitemap generation are typed Next modules.
 - 100% when production deploy, admin auth, migrations, server rendering, docs and validation are all aligned.
 

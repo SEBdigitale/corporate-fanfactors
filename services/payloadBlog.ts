@@ -3,7 +3,7 @@ import { getPayload } from 'payload'
 
 import staticBlogPosts from '@/data/blog-posts.json'
 import { normalizeBlogClusterSlug } from '@/lib/blog-clusters'
-import { getPublishedContentWhere } from '@/lib/payload-publishing'
+import { getPublishedStatusWhere } from '@/lib/payload-publishing'
 import type { PayloadBlogPost } from '@/types/payload-content'
 
 const BLOG_LIMIT = 100
@@ -18,7 +18,7 @@ export async function getPublishedBlogPosts(): Promise<PayloadBlogPost[]> {
       limit: BLOG_LIMIT,
       overrideAccess: true,
       sort: '-publishedAt',
-      where: getPublishedContentWhere(),
+      where: getPublishedStatusWhere(),
     })
 
     return result.docs
@@ -46,7 +46,7 @@ export async function getPublishedBlogPostBySlug(slug: string): Promise<PayloadB
               equals: decodedSlug,
             },
           },
-          getPublishedContentWhere(),
+          getPublishedStatusWhere(),
         ],
       },
     })

@@ -1,6 +1,6 @@
 import type { Access } from 'payload'
 
-import { getPublishedContentWhere } from '../lib/payload-publishing'
+import { getPublishedContentWhere, getPublishedStatusWhere } from '../lib/payload-publishing'
 
 export const anyone: Access = () => true
 
@@ -12,4 +12,12 @@ export const publishedOnly: Access = ({ req }) => {
   }
 
   return getPublishedContentWhere()
+}
+
+export const publishedBlogPostsOnly: Access = ({ req }) => {
+  if (req.user) {
+    return true
+  }
+
+  return getPublishedStatusWhere()
 }

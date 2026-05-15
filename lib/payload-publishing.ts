@@ -5,3 +5,11 @@ export function getPublishedContentWhere() {
     },
   }
 }
+
+export function getPublishedStatusWhere() {
+  return {
+    status: {
+      equals: 'published',
+    },
+  }
+}

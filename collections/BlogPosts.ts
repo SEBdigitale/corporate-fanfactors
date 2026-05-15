@@ -3,23 +3,22 @@ import type { CollectionConfig } from 'payload'
 import { normalizeBlogClusterCategory } from './hooks/normalizeBlogClusterCategory'
 import { normalizeBlogPostSlug } from './hooks/normalizeBlogPostSlug'
 import { sanitizeBlogPostFields } from './hooks/sanitizeBlogPostFields'
-import { syncLegacyStatusWithDraftStatus } from './hooks/syncLegacyStatusWithDraftStatus'
-import { authenticated, publishedOnly } from './access'
+import { authenticated, publishedBlogPostsOnly } from './access'
 
 export const BlogPosts: CollectionConfig = {
   slug: 'blog-posts',
   access: {
     create: authenticated,
     delete: authenticated,
-    read: publishedOnly,
+    read: publishedBlogPostsOnly,
     update: authenticated,
   },
   admin: {
-    defaultColumns: ['title', 'category', '_status', 'publishedAt', 'updatedAt'],
+    defaultColumns: ['title', 'status', 'publishedAt', 'updatedAt', 'slug', 'category'],
     useAsTitle: 'title',
   },
   hooks: {
-    beforeValidate: [normalizeBlogPostSlug, normalizeBlogClusterCategory, syncLegacyStatusWithDraftStatus, sanitizeBlogPostFields],
+    beforeValidate: [normalizeBlogPostSlug, normalizeBlogClusterCategory, sanitizeBlogPostFields],
   },
   lockDocuments: {
     duration: 30000,
@@ -44,9 +43,11 @@ export const BlogPosts: CollectionConfig = {
     },
     {
       admin: {
-        hidden: true,
+        description:
+          'Set to Published and save to make this article visible on /blog and its selected cluster page.',
       },
       defaultValue: 'draft',
+      label: 'Publishing Status',
       name: 'status',
       options: [
         {
@@ -156,7 +157,4 @@ export const BlogPosts: CollectionConfig = {
       ],
     },
   ],
-  versions: {
-    drafts: true,
-  },
 }

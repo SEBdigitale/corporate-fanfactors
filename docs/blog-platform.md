@@ -25,7 +25,7 @@ Posts should include:
 - featured image URL
 - Blog Cluster, stored in the existing `category` column as a controlled cluster slug
 - tags
-- Payload draft or published status
+- visible draft or published status
 - SEO title
 - SEO description
 - social image URL
@@ -77,7 +77,7 @@ The `/blog` homepage uses the same dark FanFactors visual direction as the stati
 
 Featured images are managed through Payload's `media` collection. Production uploads require the Vercel Blob storage adapter and `BLOB_READ_WRITE_TOKEN`; without that token, Payload can save post metadata but cannot persist uploaded image files on Vercel.
 
-Dynamic blog publishing uses Payload's native `_status` draft/published field in the admin UI and public read filters. The static JSON registry keeps its legacy `status` property so launch-content validation and seeding can map old posts into Payload without changing the static fallback format; Payload mirrors that hidden legacy column automatically for compatibility.
+Dynamic blog publishing uses the visible Blog Posts `Publishing Status` field instead of Payload's draft/version publish workflow. This keeps the editor flow predictable: set an article to `Published` and save it to make it visible on `/blog`, `/blog/[slug]`, and the selected cluster page. The static JSON registry keeps its legacy `status` property so launch-content validation and seeding can map old posts into Payload without changing the static fallback format.
 
 Blog Posts use the existing `category` database column as the Blog Cluster selector. The dropdown values are the cluster slugs from `content/blogClusters.ts`, which avoids adding a new database column just to support cluster publishing. The production column must remain plain text/varchar rather than a database enum so older categories can be normalized safely. Legacy free-text categories are normalized into the closest current cluster during validation.
 
@@ -101,11 +101,11 @@ The production admin should support:
 - authenticated editor login
 - draft creation
 - editing and preview
-- publish and unpublish controls
+- publish and unpublish through the visible Blog Posts publishing status
 - featured image management
 - SEO fields
 - AI/search summary fields
-- simple post status filters from Payload's native status
+- simple post status filters from the Blog Posts publishing status
 
 ## Security Notes
 
@@ -131,4 +131,4 @@ Every published post should generate:
 
 The old static admin dashboard has been removed. Payload Admin is now the only admin direction.
 
-The public blog merges published Payload posts with typed cluster fallback content for reliability and SEO. Keep `npm run payload:verify-blog-publish`, `npm run payload:verify-blob`, `npm run build`, and production smoke tests green whenever the Payload collection or public blog read path changes.
+The public blog merges published Payload posts with typed cluster fallback content for reliability and SEO. Keep `npm run payload:repair-blog`, `npm run payload:verify-blog-publish`, `npm run payload:verify-blob`, `npm run build`, and production smoke tests green whenever the Payload collection or public blog read path changes.

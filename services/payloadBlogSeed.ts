@@ -40,7 +40,6 @@ export function buildPayloadBlogSeedPost(
   return {
     title: post.title,
     slug: post.slug,
-    _status: post.status,
     status: post.status,
     publishedAt: post.publishedAt,
     excerpt: post.excerpt,
@@ -69,7 +68,6 @@ export function buildPayloadClusterBlogSeedPost(post: BlogPost): PayloadBlogSeed
   return {
     title: post.title,
     slug: post.slug,
-    _status: post.status,
     status: post.status,
     publishedAt: toIsoDate(post.publishedAt),
     excerpt: post.excerpt,

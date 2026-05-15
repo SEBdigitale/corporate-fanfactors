@@ -11,7 +11,6 @@ async function repairPayloadBlogPosts() {
   const result = await payload.find({
     collection,
     depth: 0,
-    draft: true,
     limit: 200,
     overrideAccess: true,
     sort: '-updatedAt',
@@ -29,7 +28,6 @@ async function repairPayloadBlogPosts() {
       id: post.id,
       collection,
       data: patch,
-      draft: post._status !== 'published',
       overrideAccess: true,
     })
 
@@ -64,7 +62,7 @@ function buildRepairPatch(post: PayloadBlogPost) {
     patch.seo = seo
   }
 
-  if ((post._status === 'published' || post.status === 'published') && !post.publishedAt) {
+  if (post.status === 'published' && !post.publishedAt) {
     patch.publishedAt = new Date().toISOString()
   }
 

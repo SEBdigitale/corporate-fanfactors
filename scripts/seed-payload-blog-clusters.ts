@@ -14,7 +14,6 @@ async function seedPayloadBlogClusters() {
   for (const post of blogPosts) {
     const existing = await payload.find({
       collection,
-      draft: true,
       limit: 1,
       overrideAccess: true,
       where: {
@@ -32,7 +31,6 @@ async function seedPayloadBlogClusters() {
     await payload.create({
       collection,
       data: buildPayloadClusterBlogSeedPost(post),
-      draft: post.status === 'draft',
       overrideAccess: true,
     })
 

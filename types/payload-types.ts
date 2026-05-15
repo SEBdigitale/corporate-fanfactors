@@ -195,6 +195,9 @@ export interface BlogPost {
    * Public URL slug, for example fan-owners-direct-pay. Punctuation and spaces are normalized on save.
    */
   slug: string;
+  /**
+   * Set to Published and save to make this article visible on /blog and its selected cluster page.
+   */
   status: 'draft' | 'published';
   publishedAt?: string | null;
   excerpt: string;
@@ -239,7 +242,6 @@ export interface BlogPost {
   };
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -440,7 +442,6 @@ export interface BlogPostsSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

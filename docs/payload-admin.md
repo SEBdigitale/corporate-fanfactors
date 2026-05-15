@@ -20,7 +20,7 @@
 
 - `users`: Payload-authenticated admins and editors.
 - `media`: uploaded images with reusable card and social sizes.
-- `blog-posts`: draft/published articles with SEO fields, a URL slug, and a Blog Cluster selector.
+- `blog-posts`: articles with a visible Publishing Status field, SEO fields, a URL slug, and a Blog Cluster selector.
 - `pages`: draft/published page records for the future dynamic site.
 
 ## Environment
@@ -158,4 +158,4 @@ The public SEO blog now merges published Payload posts with typed Next.js fallba
 
 Keep the `blog_posts.category` database column as text/varchar. Payload uses a custom admin dropdown for cluster selection, not a database enum, so legacy category values can be normalized without breaking saves.
 
-Payload's native `_status` field is the only visible editorial publishing status for dynamic content. The legacy `status` column remains hidden for compatibility with the seeded launch data and is synchronized automatically before validation so it cannot drift away from Payload's draft workflow.
+Blog Posts use a visible `Publishing Status` field for the editorial state. Set it to `Published` and save to make a post visible on the public blog and its selected cluster page. This avoids the fragile draft/version publish flow for blog posts while preserving normal authenticated Payload editing.

@@ -14,33 +14,37 @@ async function verifyPayloadBlogPublish() {
 
     const created = await payload.create({
       collection,
-      data: buildPostData('created', 'published'),
-      draft: false,
+      data: buildPostData('created', 'draft'),
       overrideAccess: true,
     })
 
-    const draft = await payload.update({
-      id: created.id,
-      collection,
-      data: buildPostData('draft update', 'draft'),
-      draft: true,
-      overrideAccess: true,
-    })
-
-    if (draft._status !== 'draft') {
-      throw new Error(`Expected draft update status to be draft, received ${draft._status}`)
+    if (created.status !== 'draft') {
+      throw new Error(`Expected created status to be draft, received ${created.status}`)
     }
 
     const published = await payload.update({
       id: created.id,
       collection,
       data: buildPostData('published update', 'published'),
-      draft: false,
       overrideAccess: true,
     })
 
-    if (published._status !== 'published') {
-      throw new Error(`Expected published status, received ${published._status}`)
+    if (published.status !== 'published') {
+      throw new Error(`Expected published status, received ${published.status}`)
+    }
+
+    const revised = await payload.update({
+      id: created.id,
+      collection,
+      data: {
+        ...buildPostData('published revision', 'published'),
+        excerpt: 'Updated smoke test post verifying normal Payload blog publishing saves without drafts.',
+      },
+      overrideAccess: true,
+    })
+
+    if (revised.status !== 'published') {
+      throw new Error(`Expected revised status, received ${revised.status}`)
     }
 
     const visible = await payload.find({
@@ -55,7 +59,7 @@ async function verifyPayloadBlogPublish() {
             },
           },
           {
-            _status: {
+            status: {
               equals: 'published',
             },
           },
@@ -94,13 +98,12 @@ async function deleteExistingBySlug(payload: Awaited<ReturnType<typeof getPayloa
   }
 }
 
-function buildPostData(label: string, status: NonNullable<BlogPostData['_status']>): BlogPostData {
+function buildPostData(label: string, status: NonNullable<BlogPostData['status']>): BlogPostData {
   const title = `Payload Publish Smoke ${label}`
 
   return {
     title,
     slug,
-    _status: status,
     status,
     publishedAt: new Date().toISOString(),
     excerpt: `Smoke test post used to verify Payload can save drafts and publish changes for the corporate blog.`,
